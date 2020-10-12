@@ -116,48 +116,41 @@ To receive the LO credits - all summative projects must receive a C- Grade (50% 
   <tr>
     <th>Project Component</th>
     <th>Acceptance criteria</th>
-    <th>Mark (out of 10)</th>
     <th>Component weighting</th>
     <th>Assessment Grade</th>
   </tr>
   <tr>
     <td>Code quality</td>
     <td>Code looks professional and is formatted in a consistent manner. Code is easy to read and understand, with comments and well named functions and variables. No errors/bugs/syntax problems.  No unused code, minimal console warnings.  It will be straightforward for other developers or your future selves to run,build and deploy the project.</td>
-    <td></td>
     <td>20%</td>
     <td></td>
   </tr>
   <tr>
     <td>Development process	</td>
     <td>Final code to be graded is in the master branch. Clear commit messages and communication on pull requests.</td>
-    <td></td>
     <td>20%</td>
     <td></td>
   </tr>
   <tr>
     <td>Security</td>
     <td>Security has been applied across the UI, server, and database using industry standard tools and techniques.  Plug in technologies have been used where appropriate.  Security can be monitored.  </td>
-    <td></td>
     <td>20%</td>
     <td></td>
   </tr>
   <tr>
     <td>Deployment</td>
     <td>The application is deployed to a live testing platform and is available to properly authenticated public. Changes have been made as appropriate after feedback from users or product owner. Data have been migrated to the live database.   </td>
-    <td></td>
     <td>20%</td>
     <td></td>
   </tr>
    <tr>
     <td>User experience</td>
     <td>The user interface is presentable and easy to use for the intended audience. The user interface must help and not obstruct the user acheive perform their use cases. The UI should fail gracefully and provide a nice experience to the user if errors occur.  The user should know if he or she is waiting for an asynchronous action to complete. The application must run on a variety of devices and browsers, and be performant at a level appropriate for the audience.</td>
-    <td></td>
     <td>20%</td>
     <td></td>
   </tr>
   <tr>
     <th colspan="2" align="left">Total grade</th>
-    <td>/50</td>
     <td>100%</td>
     <td>/100</td>
   </tr>
