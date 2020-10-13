@@ -4,5 +4,5 @@ ENV CHOKIDAR_USEPOLLING=true
 COPY . /app
 RUN ["yarn", "install"]
 EXPOSE 3333
-ENTRYPOINT ["yarn", "start"]
+ENTRYPOINT ["yarn", "start:dev"]
 
