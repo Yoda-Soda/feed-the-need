@@ -12,7 +12,10 @@ function App() {
       </div>
     );
   }
-  if (!isAuthenticated) return <div>You are not login please login</div>;
+  if (!isAuthenticated) {
+    loginWithRedirect();
+    return null;
+  }
 
   return (
     <div className="App">
