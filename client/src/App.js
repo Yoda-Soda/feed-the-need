@@ -1,14 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
+  const { loginWithRedirect, isLoading } = useAuth0();
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          WELCOME TO THE TRADE APP OF JAN, KELLY, KATE, DAVE AND MIKE AND JO <code>src/App.js</code> and save to reload.
+          WELCOME TO THE TRADE APP OF JAN, KELLY, KATE, DAVE AND MIKE AND JO{" "}
+          <code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"
