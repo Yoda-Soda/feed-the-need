@@ -3,4 +3,4 @@ WORKDIR /app
 COPY . /app
 RUN ["yarn", "install"]
 EXPOSE 5432
-ENTRYPOINT ["yarn", "dev"]
+ENTRYPOINT ["yarn", "start:dev"]
