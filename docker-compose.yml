@@ -25,6 +25,7 @@ services:
       - PGPASSWORD=password
       - PGPORT=5432
       - NODE_ENV=development
+      - EXPRESS_PORT=5000
     depends_on:
       - db
     volumes:
@@ -37,21 +38,4 @@ services:
       context: ./db
     ports:
       - "6667:5432"
-  test:
-    image: server
-    environment: &test-env-vars
-      - PGDATABASE=postgres
-      - PGHOST=test_db
-      - PGUSER=postgres
-      - PGPASSWORD=password
-      - PGPORT=5432
-      - NODE_ENV=test
-    depends_on:
-      - server
-      - test_db
-    volumes:
-      - ./server:/app
-      - /app/node_modules
-    entrypoint: ["npm", "test"]
-  test_db:
-    image: db
+  

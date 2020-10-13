@@ -1,6 +1,5 @@
-FROM node:12
-WORKDIR /app
-COPY . /app
-RUN ["yarn", "install"]
-EXPOSE 5432
-ENTRYPOINT ["yarn", "start:dev"]
+FROM postgres:13
+ENV POSTGRES_PASSWORD=password
+COPY ./sql /docker-entrypoint-initdb.d
+
+# as per https://hub.docker.com/_/postgres  ctrl f Initialization scripts
