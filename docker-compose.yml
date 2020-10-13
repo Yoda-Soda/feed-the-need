@@ -1,5 +1,17 @@
 version: "3"
 services:
+  client:
+    build:
+      context: ./client
+    ports:
+      - "3333:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000/
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app/
+      - /app/node_modules
   server:
     image: server
     build:
