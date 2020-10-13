@@ -4,10 +4,11 @@ import "./App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
-  const { loginWithRedirect, isLoading } = useAuth0();
+  const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
   if (isLoading) {
     return <div>loading...</div>;
   }
+  if (!isAuthenticated) return <div>Sorry you're not logged in</div>;
 
   return (
     <div className="App">
