@@ -1,14 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
+import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Router>
+    <Auth0ProviderWithHistory>
+      <App />
+    </Auth0ProviderWithHistory>
+  </Router>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
