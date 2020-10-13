@@ -2,7 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import LogoutButton from "./components/logout-button";
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
   if (isLoading) {
@@ -21,6 +21,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <LogoutButton />
         <p>
           WELCOME TO THE TRADE APP OF JAN, KELLY, KATE, DAVE AND MIKE AND JO{" "}
           <code>src/App.js</code> and save to reload.
