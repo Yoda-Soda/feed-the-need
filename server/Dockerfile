@@ -1,6 +1,6 @@
 FROM node:12
 WORKDIR /app
-COPY . /app
+COPY package*.json /app
 RUN ["yarn", "install"]
-EXPOSE 5432
-ENTRYPOINT ["yarn", "start:dev"]
+COPY . /app
+ENTRYPOINT ["yarn", "dev"]
