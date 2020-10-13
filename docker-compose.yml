@@ -18,7 +18,7 @@ services:
     build:
       context: ./server
     ports:
-      - "6666:5000"
+      - "5123:5000"
     environment:
       - PGDATABASE=postgres
       - PGHOST=db
