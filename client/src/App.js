@@ -3,6 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./components/logout-button";
+import { Button } from "@material-ui/core"; //
+
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
   if (isLoading) {
@@ -22,18 +24,11 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <LogoutButton />
-        <p>
-          WELCOME TO THE TRADE APP OF JAN, KELLY, KATE, DAVE AND MIKE AND JO{" "}
-          <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>NAU MAI - WELCOME TO FEED THE NEED </p>
+
+        <Button variant="contained" color="secondary">
+          KIA ORA
+        </Button>
       </header>
     </div>
   );
