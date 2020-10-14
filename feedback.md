@@ -7,6 +7,3 @@
 ## Was the assignment relevant to the topics covered in the tutorial videos and meetings?
 
 ## Would you like to add any other feedback?
-
-
- 
