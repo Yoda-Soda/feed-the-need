@@ -29,6 +29,7 @@ function App() {
         <Button variant="contained" color="secondary">
           KIA ORA
         </Button>
+        <CircularProgressWithLabel value={progress} />
       </header>
     </div>
   );
