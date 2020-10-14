@@ -4,6 +4,7 @@ import "./App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./components/logout-button";
 import { Button } from "@material-ui/core";
+import { icons } from "@material-ui/core";
 
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
@@ -29,7 +30,6 @@ function App() {
         <Button variant="contained" color="secondary">
           KIA ORA
         </Button>
-        <CircularProgressWithLabel value={progress} />
       </header>
     </div>
   );
