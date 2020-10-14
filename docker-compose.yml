@@ -1,0 +1,42 @@
+version: "3"
+services:
+  client:
+    build:
+      context: ./client
+    ports:
+      - "3333:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000/
+    stdin_open: true
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app/
+      - /app/node_modules
+  server:
+    image: server
+    build:
+      context: ./server
+    ports:
+      - "5123:5000"
+    environment:
+      - PGDATABASE=postgres
+      - PGHOST=db
+      - PGUSER=postgres
+      - PGPASSWORD=password
+      - PGPORT=5432
+      - NODE_ENV=development
+      - EXPRESS_PORT=5000
+    depends_on:
+      - db
+    volumes:
+      - ./server:/app
+      - /app/node_modules/
+    entrypoint: ["yarn", "dev"]
+  db:
+    image: db
+    build:
+      context: ./db
+    ports:
+      - "6667:5432"
+  
