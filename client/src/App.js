@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./components/logout-button";
-import { Button } from "@material-ui/core"; //
+import { Button } from "@material-ui/core";
 
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
