@@ -6,8 +6,6 @@ import LogoutButton from "./components/logout-button";
 import { Button } from "@material-ui/core";
 import { Icon } from "@material-ui/core";
 
-// import "fontsource-roboto";
-
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
   if (isLoading) {
