@@ -24,13 +24,6 @@ function App() {
   return (
     <div>
       <HeaderBar />
-      <div className="App">
-        <header className="App-header">
-          <Icon color="secondary">star</Icon>
-          <img src={logo} className="App-logo" alt="logo" />
-          <Icon color="secondary">star</Icon>
-        </header>
-      </div>
     </div>
   );
 }
