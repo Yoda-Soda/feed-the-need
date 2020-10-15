@@ -1,16 +1,15 @@
 const express = require("express");
 const app = express.Router();
+const pool = require("../db");
 
 app.post("/listings", async (req, res) => {
+    const { donor_id, title, description } = req.body;
     try {
-      const { body } = req;
-    //   const newlisting = await pool.query(
-    //     "CREATE listing SET list_id = $1, donor_id = $2, date_created = $3, title = $4, description = $5 ", //Needs correct formatting still
-    //     []
-    //   );
-  
-    //   return res.json(newlisting);
-    return res.status(200).send("post listings success");
+      const newlisting = await pool.query(
+        `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
+        [ donor_id, title, description ]
+      );
+      res.status(200).json("List was updated");
     } catch (error) {
       console.log(error);
       return res.status(400).end();
@@ -19,14 +18,10 @@ app.post("/listings", async (req, res) => {
 
   app.get("/listings", async (req, res) => {
     try {
-      const { body } = req;
-    //   const newlisting = await pool.query(
-    //     "CREATE listing SET list_id = $1, donor_id = $2, date_created = $3, title = $4, description = $5 ", //Needs correct formatting still
-    //     []
-    //   );
-  
-    //   return res.json(newlisting);
-    return res.status(200).send("get listings success");
+      const oldlisting = await pool.query(
+        `SELECT donor_id, title, description  FROM list`
+      );
+      return res.json(oldlisting.rows);
     } catch (error) {
       console.log(error);
       return res.status(400).end();
