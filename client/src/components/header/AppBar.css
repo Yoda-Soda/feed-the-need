@@ -1,0 +1,13 @@
+.title {
+  flex-grow: 1;
+  color: black;
+}
+
+.email {
+  margin-right: 10px;
+  color: black;
+}
+
+.bar {
+  background-color: white;
+}
