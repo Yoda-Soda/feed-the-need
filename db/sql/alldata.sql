@@ -8,7 +8,7 @@ insert into user_account (email) values ( 'katiemiles@developersinstitute.co.nz'
 CREATE TABLE list (
 	id SERIAL PRIMARY KEY,
 	donor_id int,
-	title text,
+	title TEXT NOT NULL,
 	description text,
 	date_created TIMESTAMP DEFAULT NOW(),
 	CONSTRAINT fk_user_account
