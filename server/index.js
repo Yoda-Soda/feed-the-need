@@ -2,7 +2,11 @@ const express = require("express");
 const app = express();
 const port = process.env.EXPRESS_PORT || 5000;
 const jwtCheck = require("./jwt-check");
+const swaggerUi = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(jwtCheck); //middleware will check all routes for auth
 
 app.get("/", (req, res) => {
