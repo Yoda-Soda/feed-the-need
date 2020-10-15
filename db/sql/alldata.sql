@@ -3,13 +3,13 @@ CREATE TABLE user_account (
 	email TEXT NOT NULL UNIQUE
 );
 insert into user_account (email) values ( 'michaelbotur@developersinstitute.co.nz' );
-insert into user_account (email) values ( 'katiemiles@developersinstitute.co.nz' );
+insert into user_account (email) values ( 'katie2miles@developersinstitute.co.nz' );
 
 CREATE TABLE list (
 	id SERIAL PRIMARY KEY,
-	donor_id int,
+	donor_id int NOT NULL,
 	title TEXT NOT NULL,
-	description text,
+	description TEXT NOT NULL,
 	date_created TIMESTAMP DEFAULT NOW(),
 	CONSTRAINT fk_user_account
 		FOREIGN KEY(donor_id)
