@@ -6,6 +6,13 @@ import LogoutButton from "./components/logout-button";
 import { Button } from "@material-ui/core";
 import { Icon } from "@material-ui/core";
 import HeaderBar from "./components/header/AppBar";
+import  AddListingPage  from "./components/views/AddListingPage";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
@@ -22,9 +29,17 @@ function App() {
   }
 
   return (
+    <Router>
     <div>
       <HeaderBar />
+    <div className="App">
+      <Switch>
+        <Route path="/my-listings/add">
+          <AddListingPage />
+        </Route>
+      </Switch>
     </div>
+    </Router>
   );
 }
 
