@@ -5,6 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./components/logout-button";
 import { Button } from "@material-ui/core";
 import { Icon } from "@material-ui/core";
+import AppBarJo from "./components/AppBar";
+
 
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
@@ -20,17 +22,27 @@ function App() {
     return null;
   }
 
+  // return (
+  //   <div className="App">
+  //     <header className="App-header">
+  //       <Icon>star</Icon>
+  //       <AppBar />
+  //       <img src={logo} className="App-logo" alt="logo" />
+  //       <Button variant="contained" color="secondary">
+  //         KIA ORA
+  //       </Button>
+  //       <p>NAU MAI - WELCOME TO FEED THE NEED </p>
+  //       <LogoutButton />
+  //     </header>
+  //   </div>
+  // );
+// function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Icon>star</Icon>
-        <img src={logo} className="App-logo" alt="logo" />
-        <Button variant="contained" color="secondary">
-          KIA ORA
-        </Button>
-        <p>NAU MAI - WELCOME TO FEED THE NEED </p>
-        <LogoutButton />
-      </header>
+    <div>
+      <AppBarJo />
+      <img src={logo} className="App-logo" alt="logo" />
+      
     </div>
   );
 }
