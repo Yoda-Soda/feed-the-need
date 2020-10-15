@@ -18,13 +18,18 @@ paths:
         - application/json
       produces:
         - application/json
-      parameters:
-        - in: body
-          name: body
-          description: List object that needs to be added to listings
-          required: true
-          schema:
-            $ref: '#/components/schema/NewListing'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schema/NewListing'
+              type:
+                object
+              properties:
+                donor_id: integer
+                title: string
+                description: string
       responses: 
         '201':
           description: OK - Listing has been listed
@@ -36,6 +41,8 @@ paths:
           $ref: '#/components/responses/ServerError'
         '404':
           $ref: '#/components/responses/NotFound'
+      tag:
+      - listings
 
 
 components:
