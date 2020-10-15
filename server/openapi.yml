@@ -1,0 +1,48 @@
+openapi: "3.0.2"
+info:
+  title: Nau mai, welome to Feed the Need
+  version: "1.0"
+servers:
+  - url: "/api"
+paths:
+  /listings:
+    post:
+    summary: returns the listing which a user has posted. 
+        description:  User posts a listing; this is added to DB and also shows on screen
+        requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/donorswithlistings" 
+        responses:
+        "201": 
+          description: Contains new listing's id and other data. Note a 201 means a new resource has been created. 
+          content:
+            application/json:
+              schema:
+                type: integer, string
+        tags:
+        - listings
+components:
+  schemas:
+    Listings:
+      type: object
+      properties:
+        id:
+            type: string
+        firstName_username:
+          type: string
+        lastName_username:
+          type: string
+        email:
+          type: string
+        itemdonated:
+            type: string
+        timestamp_when_donated:
+            type: datetime
+      required:
+        - firstName_username
+        - lastName_username
+        - email
+        - itemdonated
