@@ -1,19 +1,12 @@
 import React from "react";
 import AddListingForm from "../AddListingForm";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import { Container } from "@material-ui/core";
 
 const AddListingPage = () => {
     return (
-        <div>
-            <p>This is the Page</p>
-            <p>below should be the form</p>
+        <Container maxWidth="sm">           
             <AddListingForm />
-        </div>
+        </Container>
     );
 }
 

@@ -8,6 +8,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import "./AppBar.css";
 import LogoutButton from "../logout-button";
 import { useAuth0 } from "@auth0/auth0-react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const HeaderBar = () => {
   const { user } = useAuth0();
@@ -20,6 +26,7 @@ const HeaderBar = () => {
         <Typography variant="h6" className="title">
           FEEDtheNEED
         </Typography>
+        <Link to="/my-listings/add">Add a Listing</Link>
         <span className="email">NAU MAI - WELCOME {user.email} </span>
         <LogoutButton />
       </Toolbar>
