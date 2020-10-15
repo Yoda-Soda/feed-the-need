@@ -5,6 +5,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./components/logout-button";
 import { Button } from "@material-ui/core";
 import { Icon } from "@material-ui/core";
+// Page imports
+import  AddListingPage  from "./components/views/AddListingPage";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
@@ -21,8 +29,17 @@ function App() {
   }
 
   return (
+    <Router>
     <div className="App">
+      <Switch>
+        <Route path="/my-listings/add">
+          <AddListingPage />
+        </Route>
+      </Switch>
       <header className="App-header">
+
+      <Link to="/my-listings/add">Add a Listing Page</Link>
+
         <Icon>star</Icon>
         <img src={logo} className="App-logo" alt="logo" />
         <Button variant="contained" color="secondary">
@@ -32,6 +49,7 @@ function App() {
         <LogoutButton />
       </header>
     </div>
+    </Router>
   );
 }
 
