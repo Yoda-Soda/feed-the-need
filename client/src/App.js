@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./components/logout-button";
 import { Button } from "@material-ui/core";
 import { Icon } from "@material-ui/core";
-// Page imports
+import HeaderBar from "./components/header/AppBar";
 import  AddListingPage  from "./components/views/AddListingPage";
 import {
   BrowserRouter as Router,
@@ -30,24 +30,14 @@ function App() {
 
   return (
     <Router>
+    <div>
+      <HeaderBar />
     <div className="App">
       <Switch>
         <Route path="/my-listings/add">
           <AddListingPage />
         </Route>
       </Switch>
-      <header className="App-header">
-
-      <Link to="/my-listings/add">Add a Listing Page</Link>
-
-        <Icon>star</Icon>
-        <img src={logo} className="App-logo" alt="logo" />
-        <Button variant="contained" color="secondary">
-          KIA ORA
-        </Button>
-        <p>NAU MAI - WELCOME TO FEED THE NEED </p>
-        <LogoutButton />
-      </header>
     </div>
     </Router>
   );
