@@ -31,13 +31,15 @@ function App() {
   return (
     <Router>
     <div>
-      <HeaderBar />
+     
     <div className="App">
+    <HeaderBar />
       <Switch>
         <Route path="/my-listings/add">
           <AddListingPage />
         </Route>
       </Switch>
+    </div>
     </div>
     </Router>
   );
