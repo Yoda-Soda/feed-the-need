@@ -7,7 +7,7 @@ app.post("/listings", async (req, res) => {
     try {
       const newlisting = await pool.query(
         `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
-        [ donor_id, title, description ]
+        [ 1, title, description ]
       );
       res.status(200).json("List was updated");
     } catch (error) {
