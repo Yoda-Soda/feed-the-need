@@ -15,7 +15,7 @@ const AddListingForm = () => {
     const postToApi = async() => {
         setLoading(true)
         try {
-            const result = await fetch("http://localhost:5123/api/listings", { method: 'POST', body: JSON.stringify({ listingTitle, listingDescription })})
+            const result = await fetch("http://localhost:5123/api/listings", { method: 'POST', body: JSON.stringify({ donor_id:1, listingTitle, listingDescription })})
             if(!result.ok) {
                 throw new Error("Could not create Listing")
             }       
@@ -37,18 +37,14 @@ const AddListingForm = () => {
         <div>           
             <FormGroup>
                 <h2>Add A Listing</h2>
-                <TextField onChange={(e) => setListingTitle(e.target.value)} label="Listing Title"  margin="normal" variant="outlined" required/>
-                <TextField onChange={(e) => setListingDescription(e.target.value)} label="Listing Description"  multiline="true" rows={4} margin="normal" variant="outlined"  required/>
+                <TextField onChange={(e) => setListingTitle(e.target.value)} label="Listing Title" value={listingTitle} margin="normal" variant="outlined" required/>
+                <TextField onChange={(e) => setListingDescription(e.target.value)} label="Listing Description" value={listingDescription} multiline="true" rows={4} margin="normal" variant="outlined"  required/>
                 <Button onClick={postToApi} variant="contained" color="primary" href="#contained-buttons">
                     Create Listing
                 </Button>
-                {/* <div>{listingTitle}, {ListingDescription}</div> */}
             </FormGroup>
         </div>
     );
 }
 
 export default AddListingForm;
-
-// value={listingTitle}
-// value={ListingDescription}
