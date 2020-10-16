@@ -20,7 +20,7 @@ const AddListingForm = () => {
             console.log(myToken);
             const result = await fetch("http://localhost:5123/api/listings", 
             { method: 'POST',
-              headers: { 'Authorization' : `Bearer ${myToken}` }, 
+              headers: { "Content-Type": "application/json", 'Authorization' : `Bearer ${myToken}` }, 
               body: JSON.stringify({ donor_id:1, title: listingTitle, description: listingDescription })
             })
 

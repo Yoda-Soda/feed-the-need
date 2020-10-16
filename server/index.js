@@ -11,10 +11,8 @@ const cors = require("cors");
 app.use(cors());
 
 app.use(express.json());
-app.use(("*", async (req, res) => {console.log(req)}));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// app.use(jwtCheck);
- //middleware will check all routes for auth
+app.use(jwtCheck); //middleware will check all routes for auth
 app.use("/api", apiRouter);
 
 app.listen(port, () => {
