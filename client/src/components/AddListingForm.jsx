@@ -1,51 +1,54 @@
-import React from "react";
+import React, { useState }from "react";
 import { 
-    Button, 
-    Icon, 
-    FormGroup, 
-    InputLabel, 
-    Input, 
-    FormHelperText,
+    Button,    
+    FormGroup,    
     TextField,
-    styled
 } from "@material-ui/core";
-// import {  } from "@material-ui/core";
 
 
 const AddListingForm = () => {
+    const [listingTitle, setListingTitle] = useState('');
+    const [listingDescription, setListingDescription] = useState('');
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const postToApi = async() => {
+        setLoading(true)
+        try {
+            const result = await fetch("http://localhost:5123/api/listings", { method: 'POST', body: JSON.stringify({ listingTitle, listingDescription })})
+            if(!result.ok) {
+                throw new Error("Could not create Listing")
+            }       
+        } catch (e) {
+            setError(true)
+            console.error(e.message);        
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    if(loading) {
+        return (<div>loading...</div>)
+    }
+    if(error) {
+        return (<div>An error occurred.</div>)
+    }
     return (
-        <fragment>
-            <p>This is the Form</p>
+        <div>           
             <FormGroup>
-            <TextField label="Normal" id="outlined-margin-normal" defaultValue="Default Value" className={classes.textField} helperText="Some important text" margin="normal" variant="outlined" />
-            <InputLabel htmlFor="my-input" id="outlined-basic" label="Outlined" margin="normal" variant="outlined">Listing Title</InputLabel>
-            <Input required id="my-input" aria-describedby="my-helper-text" />
-            {/* <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText> */}
-            <TextField
-                required 
-                margin="normal"
-                id="outlined-multiline-static"
-                label="Multiline"
-                multiline
-                rows={4}
-                defaultValue="Default Value"
-                variant="outlined"
-                />
-           <Button variant="contained" color="primary" href="#contained-buttons">
-                Link
-            </Button>
+                <h2>Add A Listing</h2>
+                <TextField onChange={(e) => setListingTitle(e.target.value)} label="Listing Title"  margin="normal" variant="outlined" required/>
+                <TextField onChange={(e) => setListingDescription(e.target.value)} label="Listing Description"  multiline="true" rows={4} margin="normal" variant="outlined"  required/>
+                <Button onClick={postToApi} variant="contained" color="primary" href="#contained-buttons">
+                    Create Listing
+                </Button>
+                {/* <div>{listingTitle}, {ListingDescription}</div> */}
             </FormGroup>
-
-            
-
-
-            {/* <TextField label="Dense" id="margin-dense" defaultValue="Default Value" className={classes.textField} helperText="Some important text" margin="dense" /> 
-            <TextField label="Normal" id="margin-normal" defaultValue="Default Value" className={classes.textField} helperText="Some important text" margin="normal" /> */}
-            
-            
-           
-        </fragment>
+        </div>
     );
 }
 
 export default AddListingForm;
+
+// value={listingTitle}
+// value={ListingDescription}
