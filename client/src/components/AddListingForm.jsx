@@ -4,9 +4,10 @@ import {
     FormGroup,    
     TextField,
 } from "@material-ui/core";
+import { useAuth0 } from "@auth0/auth0-react"
 
-
-const AddListingForm = () => {
+const AddListingForm = () => {    
+    const { getAccessTokenSilently } = useAuth0();
     const [listingTitle, setListingTitle] = useState('');
     const [listingDescription, setListingDescription] = useState('');
     const [error, setError] = useState(false);
@@ -15,7 +16,14 @@ const AddListingForm = () => {
     const postToApi = async() => {
         setLoading(true)
         try {
-            const result = await fetch("http://localhost:5123/api/listings", { method: 'POST', body: JSON.stringify({ donor_id:1, listingTitle, listingDescription })})
+            const myToken = await getAccessTokenSilently();
+            console.log(myToken);
+            const result = await fetch("http://localhost:5123/api/listings", 
+            { method: 'POST',
+              headers: { 'Authorization' : `Bearer ${myToken}` }, 
+              body: JSON.stringify({ donor_id:1, title: listingTitle, description: listingDescription })
+            })
+
             if(!result.ok) {
                 throw new Error("Could not create Listing")
             }       

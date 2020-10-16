@@ -10,6 +10,8 @@ import {
   Route
 } from "react-router-dom";
 
+
+
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
   if (isLoading) {
