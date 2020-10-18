@@ -18,7 +18,7 @@ const AddListingForm = () => {
         try {
             const myToken = await getAccessTokenSilently();
             console.log(myToken);
-            const result = await fetch("http://localhost:5123/api/listings", 
+            const result = await fetch(`${process.env.REACT_APP_API_URL}/api/listings`, 
             { method: 'POST',
               headers: { "Content-Type": "application/json", 'Authorization' : `Bearer ${myToken}` }, 
               body: JSON.stringify({ donor_id:1, title: listingTitle, description: listingDescription })
