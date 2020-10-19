@@ -37,7 +37,7 @@ app.get("/listings/:id", async (req, res) => {
 
   try {
     const { id } = req.params;
-
+    console.log(id);
     if (!isPositiveInt(id)) {
       return res.status(400).send("Bad Request - id is not a positiveInt");
     }
@@ -50,6 +50,7 @@ app.get("/listings/:id", async (req, res) => {
     }
 
     res.json(singleListing.rows[0]);
+    // console.log(singleListing.rows);
   } catch (err) {
     console.error(err.message);
     return res.status(500).send("Database access error");
