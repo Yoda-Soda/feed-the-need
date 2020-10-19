@@ -59,15 +59,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  description:
-                    type: string
-              examples:
-                Example listing from Feed the Need App:
-                  value: '{id:86, description: "Free 8 bedroom house, perched precariously on the side of an eroding cliff"}'
+                $ref: "#/components/schema/Listings"
         "400":
           $ref: "#/components/responses/BadRequest"
         "404":

@@ -31,7 +31,7 @@ app.post("/listings", async (req, res) => {
 });
 
 // Ticket CGP-4:  Get One request /api/listings/{id}
-//when I send in an ID to return,I am getting an unauthorised token message in the Swagger UI
+
 app.get("/listings/:id", async (req, res) => {
   console.log("get one route confirmed");
 
@@ -39,6 +39,8 @@ app.get("/listings/:id", async (req, res) => {
     const { id } = req.params;
     console.log(id);
     if (!isPositiveInt(id)) {
+      // suggestion?
+      // return res.status(400).json({ message: "Bad Request - id is not a positiveInt"});
       return res.status(400).send("Bad Request - id is not a positiveInt");
     }
 
