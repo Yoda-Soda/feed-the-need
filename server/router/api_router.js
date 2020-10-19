@@ -7,8 +7,9 @@ const isPositiveInt = (intToBeTested) =>
 
 app.post("/listings", async (req, res) => {
   try {
+   const email = req.user["http://feedtheneed.click/email"];
     const { donor_id, title, description } = req.body;
-    console.log(req.body)
+    console.log(req.body);
     if (
       donor_id === undefined ||
       title === undefined ||
