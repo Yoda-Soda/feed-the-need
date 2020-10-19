@@ -43,14 +43,14 @@ app.get("/listings/:id", async (req, res) => {
       return res.status(400).send("The listing id is not a positive integer");
     }
 
-    const singleListing = await pool.query(`SELECT * FROM list WHERE id = $1", [
+    const singleListing = await pool.query(`SELECT * FROM list WHERE id = $1`, [
       id,
     ]);
     if (singleListing.rowCount == [null]) {
       return res.status(404).send("No listing exists with that Id");
     }
 
-    res.json(singleListing.rows[0]);
+    res.json(singleListing.rows[1]);
   } catch (err) {
     console.error(err.message);
     return res.status(500).send("Database access error");
