@@ -6,7 +6,10 @@ import {
     Route,
     useParams
   } from "react-router-dom";
-import { Container, Button } from "@material-ui/core";
+
+import { Container, Button, Grid, Box, Typography } from "@material-ui/core";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 
 const ViewListingPage = () => {
 
@@ -34,7 +37,16 @@ const ViewListingPage = () => {
     useEffect(() => {
         getListingData();
       }, []);
-    const { listingId } = useParams();    
+
+    const { listingId } = useParams();
+    
+    // styles
+    const h1 = {
+        fontSize: '48px'
+    };
+   
+
+
 
     if(loading) {
         return (<div>loading...</div>)
@@ -44,14 +56,25 @@ const ViewListingPage = () => {
     }
 
     return (
-        <Container maxWidth="sm"> 
-            <h1>Title { listingData.title }</h1>   
-            <p>Description Description Description { listingData.description }</p>            
-                <Button href="/listings" variant="contained" color="primary">
-                Back to Listings
-                {/* Does this go back to all listings page? */}
+        // <Container maxWidth="lg"> 
+        <Container>
+         <Grid container spacing={3} >
+            <Grid item xs={12} md={6}>    
+            
+            <Typography component="div">
+            <Box fontSize="h1.fontSize" style={h1} >
+                Title { listingData.title }
+            </Box>
+            <Box fontSize="fontSize" m={1}>
+            Description Description Description Description Description Description Description Description Description Description Description Description{ listingData.description }
+            </Box>  
+            </Typography>            
+                <Button m={1} href="/listings" variant="contained" color="primary" startIcon={<ArrowBackIcon />}>
+                Back to Listings                   
                 </Button>            
-            <p>This is the listing id: {listingId}</p>
+                <p>This is the listing id: {listingId}</p>
+            </Grid>
+         </Grid>         
         </Container>
     );
 }
