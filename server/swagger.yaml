@@ -7,7 +7,7 @@ info:
 servers:
   - url: http://localhost:5123/api
     description: Internal staging API server for testing
-  - url: http://nau-mai.co.nz/api
+  - url: http://feedtheneed.click/
     description: Main API server
 
 paths:
@@ -48,7 +48,7 @@ paths:
       summary: Gets a listing by ID.
       parameters:
         - in: path
-          name: listingId
+          name: listingsId
           schema:
             type: integer
           required: true
@@ -67,7 +67,7 @@ paths:
                     type: string
               examples:
                 Example listing from Feed the Need App:
-                  value: '{id:86, description: "Free 8 bedroom house, perched precariously on the side of an eroding cliff "}'
+                  value: '{id:86, description: "Free 8 bedroom house, perched precariously on the side of an eroding cliff"}'
         "400":
           $ref: "#/components/responses/BadRequest"
         "404":

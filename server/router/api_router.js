@@ -3,7 +3,7 @@ const app = express.Router();
 const pool = require("../db");
 
 const isPositiveInt = (intToBeTested) =>
-  intToBeTested > 0 && Number.isInteger(Number(intToBeTested));
+  Number(intToBeTested) > 0 && Number.isInteger(Number(intToBeTested));
 
 app.post("/listings", async (req, res) => {
   try {
@@ -31,16 +31,15 @@ app.post("/listings", async (req, res) => {
 });
 
 // Ticket CGP-4:  Get One request /api/listings/{id}
-
+//when I send in an ID to return,I am getting an unauthorised token message in the Swagger UI
 app.get("/listings/:id", async (req, res) => {
   console.log("get one route confirmed");
 
   try {
     const { id } = req.params;
-    parseInt(id);
-    // check if ID is an integer , if not send back 400
-    if (isNaN(id)) {
-      return res.status(400).send("The listing id is not a positive integer");
+
+    if (!isPositiveInt(id)) {
+      return res.status(400).send("Bad Request - id is not a positiveInt");
     }
 
     const singleListing = await pool.query(`SELECT * FROM list WHERE id = $1`, [
@@ -50,7 +49,7 @@ app.get("/listings/:id", async (req, res) => {
       return res.status(404).send("No listing exists with that Id");
     }
 
-    res.json(singleListing.rows[1]);
+    res.json(singleListing.rows[0]);
   } catch (err) {
     console.error(err.message);
     return res.status(500).send("Database access error");
