@@ -1,13 +1,15 @@
 openapi: 3.0.3
 info:
   title: Nau mai, welcome to Feed the Need
-  description: The API is for use with the website [NauMai](http://nau-mai.co.nz) or internal staging at [localhost:3333](http://localhost:3333).
+  description: The API is for use with the website [Feed The Need](http://feedtheneed.click) or internal staging at [localhost:3333](http://localhost:3333).
   version: 0.0.1
 
 servers:
   - url: http://localhost:5123/api
     description: Internal staging API server for testing
-  - url: http://nau-mai.co.nz/api
+  - url: http://localhost:3333
+    description: Internal staging API server for testing
+  - url: http://feedtheneed.click/api
     description: Main API server
 
 paths:
@@ -33,6 +35,39 @@ paths:
       responses: 
         '201':
           description: OK - Listing has been listed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/ServerError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tag:
+      - listings
+    get:
+      summary: View listings
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      requestBody:
+        required: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schema/ApiListing'
+              type:
+                object
+              properties:
+                donor_id: integer
+                title: string
+                description: string
+      responses: 
+        '200':
+          description: Here are your listings
+        '201':
+          description: Here are your listings
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
