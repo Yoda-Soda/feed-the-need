@@ -39,7 +39,6 @@ app.get("/listings/:id", async (req, res) => {
     const { id } = req.params;
     console.log(id);
     if (!isPositiveInt(id)) {
-      // suggestion?
       return res.status(400).send("Bad Request - id is not a positiveInt");
     }
 
