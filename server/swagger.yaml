@@ -25,7 +25,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schema/NewListing'
+              $ref: '#/components/schemas/NewListing'
               type:
                 object
               properties:
@@ -45,28 +45,14 @@ paths:
           $ref: '#/components/responses/NotFound'
       tag:
       - listings
+      
+  /api/listings:
     get:
       summary: View listings
-      consumes:
-        - application/json
       produces:
         - application/json
-      requestBody:
-        required: 
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schema/ApiListing'
-              type:
-                object
-              properties:
-                donor_id: integer
-                title: string
-                description: string
       responses: 
         '200':
-          description: Here are your listings
-        '201':
           description: Here are your listings
         '400':
           $ref: '#/components/responses/BadRequest'
@@ -76,9 +62,6 @@ paths:
           $ref: '#/components/responses/ServerError'
         '404':
           $ref: '#/components/responses/NotFound'
-      tag:
-      - listings
-
 
 components:
   responses:
