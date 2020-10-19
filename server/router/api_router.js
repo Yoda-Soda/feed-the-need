@@ -20,6 +20,11 @@ app.post("/listings", async (req, res) => {
     if (!isPositiveInt(donor_id)) {
       return res.status(400).send("Bad Request - donor_id is not positiveInt");
     }
+    const newEmail = await pool.query(
+      //  `SELECT id from user_account WHERE email = '${email}'`
+       `INSERT INTO user_account SELECT ('${email}') WHERE NOT EXISTS (SELECT id from user_account WHERE email = ('${email}')) returning id`
+    );
+    console.log(newEmail.rows);
     const newlisting = await pool.query(
       `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
       [1, title, description]
