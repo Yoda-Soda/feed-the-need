@@ -5,7 +5,7 @@ const pool = require("../db");
 const isPositiveInt = (intToBeTested) =>
   intToBeTested > 0 && Number.isInteger(Number(intToBeTested));
 
-app.post(`${"process.env.REACT_APP_API_BASE_URL/listings"}`, async (req, res) => {
+app.post(`${"process.env.REACT_APP_API_URL/listings"}`, async (req, res) => {
   try {
     const { donor_id, title, description } = req.body;
     console.log(req.body)
