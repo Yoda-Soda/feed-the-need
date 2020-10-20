@@ -7,8 +7,6 @@ info:
 servers:
   - url: http://localhost:5123/api
     description: Internal staging API server for testing
-  - url: http://localhost:3333
-    description: Internal staging API server for testing
   - url: http://feedtheneed.click/api
     description: Main API server
 
@@ -25,7 +23,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewListing'
+              $ref: '#/components/schema/NewListing'
               type:
                 object
               properties:
@@ -46,7 +44,7 @@ paths:
       tag:
       - listings
       
-  /api/listings:
+  /listings:
     get:
       summary: View listings
       produces:
