@@ -9,7 +9,6 @@ app.post("/listings", async (req, res) => {
   try {
    const email = req.user["http://feedtheneed.click/email"];
     const { donor_id, title, description } = req.body;
-    console.log(req.body);
     if (
       donor_id === undefined ||
       title === undefined ||
@@ -21,9 +20,8 @@ app.post("/listings", async (req, res) => {
       return res.status(400).send("Bad Request - donor_id is not positiveInt");
     }
     const newEmail = await pool.query(
-      //  `SELECT id from user_account WHERE email = '${email}'`
-       `INSERT INTO user_account (email) SELECT ('${email}') WHERE NOT EXISTS (SELECT id from user_account WHERE email = $1) returning id`,
-       [email]);
+       `INSERT INTO user_account (email) SELECT ($2) WHERE NOT EXISTS (SELECT id from user_account WHERE email = $1) returning id`,
+       [email, email]);
     console.log(newEmail.rows);
     const newlisting = await pool.query(
       `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
