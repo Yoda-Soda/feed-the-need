@@ -29,4 +29,14 @@ app.post("/", async (req, res) => {
   }
 });
 
+/****  get /api/listings - get all listing in newest first  ****/
+app.get("/", async (req, res) => {
+  try {
+    return res.status(200).send("get route working");
+  } catch (error) {
+    console.error(error);
+    return res.statusCode(500);
+  }
+});
+
 module.exports = app;
