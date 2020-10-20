@@ -18,7 +18,6 @@ const ViewListingPage = () => {
         setLoading(true)
         try {
             const myToken = await getAccessTokenSilently();            
-            console.log(`${process.env.REACT_APP_API_URL}/listings/${listingId}`);
             const result = await fetch(`${process.env.REACT_APP_API_URL}/listings/${listingId}`,            
             { headers: {"Content-Type": "application/json", 'Authorization' : `Bearer ${myToken}` }})
             if (!result.ok) {
