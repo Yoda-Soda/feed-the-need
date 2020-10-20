@@ -4,7 +4,7 @@ const pool = require("../../db");
 const { isPositiveInt } = require("../router_utilities/is_positive_integer");
 
 /****  post /api/listings - post single listing  ****/
-app.post("/listings", async (req, res) => {
+app.post("/", async (req, res) => {
   try {
     const { donor_id, title, description } = req.body;
     console.log(req.body);
