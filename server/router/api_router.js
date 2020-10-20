@@ -7,7 +7,7 @@ const isPositiveInt = (intToBeTested) =>
 
 app.post("/listings", async (req, res) => {
   try {
-   const email = req.user["http://feedtheneed.click/email"];
+   const email = req.user[`${process.env.DOMAIN}email`];
     const { donor_id, title, description } = req.body;
     if (
       donor_id === undefined ||
@@ -25,7 +25,7 @@ app.post("/listings", async (req, res) => {
     console.log(newEmail.rows);
     const newlisting = await pool.query(
       `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
-      [1, title, description]
+      [newEmail.rows[0].id, title, description]
     );
     res.status(201).json("OK - list was updated");
   } catch (error) {
