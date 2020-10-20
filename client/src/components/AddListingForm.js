@@ -46,8 +46,8 @@ const AddListingForm = () => {
             <FormGroup>
                 <h2>Add A Listing</h2>
                 <TextField onChange={(e) => setListingTitle(e.target.value)} label="Listing Title" value={listingTitle} margin="normal" variant="outlined" required/>
-                <TextField onChange={(e) => setListingDescription(e.target.value)} label="Listing Description" value={listingDescription} multiline="true" rows={4} margin="normal" variant="outlined"  required/>
-                <Button onClick={postToApi} variant="contained" color="primary" href="#contained-buttons">
+                <TextField onChange={(e) => setListingDescription(e.target.value)} label="Listing Description" value={listingDescription} multiline rows={4} margin="normal" variant="outlined"  required/>
+                <Button onClick={postToApi} variant="contained" color="primary" href="/my-listings/add">
                     Create Listing
                 </Button>
             </FormGroup>
