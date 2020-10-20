@@ -30,6 +30,10 @@ paths:
                 donor_id: integer
                 title: string
                 description: string
+              required:
+                - donor_id
+                - title
+                - description
       responses: 
         '201':
           description: OK - Listing has been listed
