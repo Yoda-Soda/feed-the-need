@@ -10,6 +10,7 @@ servers:
   - url: http://feedtheneed.click/api
     description: Main API server
 
+
 paths:
   /listings:
     post:
@@ -23,52 +24,54 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schema/NewListing'
-              type:
-                object
+              $ref: "#/components/schema/Listings"
+              type: object
               properties:
                 donor_id: integer
                 title: string
                 description: string
-      responses: 
-        '201':
+      responses:
+        "201":
           description: OK - Listing has been listed
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/ServerError'
-        '404':
-          $ref: '#/components/responses/NotFound'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "404":
+          $ref: "#/components/responses/NotFound"
       tag:
-      - listings
-      
-  /listings:
+        - listings
+
+  /listings/:
     get:
-      summary: View listings
-      produces:
-        - application/json
-      responses: 
-        '200':
-          description: Here are your listings
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/ServerError'
-        '404':
-          $ref: '#/components/responses/NotFound'
+      summary: Gets all listings by ID.
+      parameters:
+        - in: path
+          name: listings
+          schema:
+          description: Getting all listings
+      responses:
+        "200":
+          description: Showing all listings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schema/Listings"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
 components:
   responses:
     BadRequest:
-        description: Bad Request - missing parameter/s
+      description: Bad Request - missing parameter/s
     Unauthorized:
-        description: Unauthorized
+      description: Unauthorized
     ServerError:
-        description: Server Errors
+      description: Server Errors
     NotFound:
       description: Not Found
   schema:
@@ -90,18 +93,18 @@ components:
           type: string
           example: I have a bountiful amount of cabbages, that I am willing to donate.
         date_created:
-          type: date-time 
+          type: date-time
     NewListing:
       type: object
       required:
-        $ref: '#/components/schema/Listings/required'
+        $ref: "#/components/schema/Listings/required"
       properties:
         donor_id:
-          $ref: '#/components/schema/Listings/properties/donor_id'
+          $ref: "#/components/schema/Listings/properties/donor_id"
         title:
-          $ref: '#/components/schema/Listings/properties/title'
+          $ref: "#/components/schema/Listings/properties/title"
         description:
-          $ref: '#/components/schema/Listings/properties/description'
+          $ref: "#/components/schema/Listings/properties/description"
   securitySchemes:
     bearerAuth:
       type: http
