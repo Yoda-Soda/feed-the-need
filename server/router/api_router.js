@@ -22,8 +22,8 @@ app.post("/listings", async (req, res) => {
     }
     const newEmail = await pool.query(
       //  `SELECT id from user_account WHERE email = '${email}'`
-       `INSERT INTO user_account SELECT ('${email}') WHERE NOT EXISTS (SELECT id from user_account WHERE email = ('${email}')) returning id`
-    );
+       `INSERT INTO user_account (email) SELECT ('${email}') WHERE NOT EXISTS (SELECT id from user_account WHERE email = $1) returning id`,
+       [email]);
     console.log(newEmail.rows);
     const newlisting = await pool.query(
       `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
