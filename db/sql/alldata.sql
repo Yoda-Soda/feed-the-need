@@ -19,15 +19,3 @@ CREATE TABLE list (
 insert into list (donor_id, title, description) values ( 1, 'My Item', 'My Item Description' );
 
 
-SELECT id from user_account WHERE email = {$}
-
-
-INSERT users (email) values (email from the token) returning id
-possibly get it all in one!
-
-insert users select {email from token} where not exists (SELECT id from users WHERE email = the email you just got fro the token) returning id
-
-function addEmailToAccessToken(user, context, callback) {
-  
-   const email = req.user["http://feedtheneed.click/email"];
-  
