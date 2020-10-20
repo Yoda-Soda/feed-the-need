@@ -6,12 +6,10 @@ import HeaderBar from "./components/header/AppBar";
 import  AddListingPage  from "./components/views/AddListingPage";
 import ViewListingPage from "./components/views/ViewListingPage";
 
-import {
-  Link,
+import { 
   BrowserRouter as Router,
   Switch,
   Route,
-  useParams
 } from "react-router-dom";
 
 

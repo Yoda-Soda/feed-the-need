@@ -17,12 +17,12 @@ const ViewListingPage = () => {
     const getListingData = async () => {
         setLoading(true)
         try {
-            const myToken = await getAccessTokenSilently();
-            // TODO - use the environ variable instead of hardcoded url
-            const result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/listings/${listingId}`,
+            const myToken = await getAccessTokenSilently();            
+            console.log(`${process.env.REACT_APP_API_URL}/listings/${listingId}`);
+            const result = await fetch(`${process.env.REACT_APP_API_URL}/listings/${listingId}`,            
             { headers: {"Content-Type": "application/json", 'Authorization' : `Bearer ${myToken}` }})
             if (!result.ok) {
-               throw new(Error);
+               throw new Error("Could not retrieve Listing");
             }
             const resultJson = await result.json();
             
