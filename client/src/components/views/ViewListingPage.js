@@ -1,61 +1,59 @@
 import React, { useState, useEffect } from "react";
-import {
-    Link,
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useParams
-  } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react"
-import { Container, Button, Grid, Box, Typography } from "@material-ui/core";
+import { Container, Button, Grid, Box, Typography, CircularProgress } from "@material-ui/core";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
 const ViewListingPage = () => {
     const { getAccessTokenSilently } = useAuth0();
 
-    // TODO remove dummy data from default state
     const [listingData, setListingData] = useState({});
-    // { title: "test-title", description: "test-description", listingId: 1 }
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const { listingId } = useParams();
 
     const getListingData = async () => {
+        setLoading(true)
         try {
             const myToken = await getAccessTokenSilently();
             // TODO - use the environ variable instead of hardcoded url
-            const result = await fetch(`http://localhost:5123/api/listings/${listingId}`,
+            const result = await fetch(`${process.env.REACT_APP_API_BASE_URL}/listings/${listingId}`,
             { headers: {"Content-Type": "application/json", 'Authorization' : `Bearer ${myToken}` }})
-            //TODO - remove dummy data, replace with fetch call as above.
+            if (!result.ok) {
+               throw new(Error);
+            }
             const resultJson = await result.json();
+            
             console.log(resultJson);  
             setListingData(resultJson); 
             console.log(listingData); 
 
         } catch (e) {
+            setError(true)
             console.error(e.message);
         } finally {
-            
+            setLoading(false)
         }
     }
 
     useEffect(() => {
         getListingData();
       }, []);
-    
+
     
     // styles
     const h1 = {
         fontSize: '48px'
     };
    
-
-
-
     if(loading) {
-        return (<div>loading...</div>)
+        return (
+            <Box display="flex" justifyContent="center" alignItems="center" height="80vh">
+                <CircularProgress />
+            </Box>       
+        )
     }
     if(error) {
         return (<div>An error occurred.</div>)
@@ -69,17 +67,15 @@ const ViewListingPage = () => {
             
             <Typography component="div">
             <Box fontSize="h1.fontSize" style={h1} >
-                {/* Title { listingData.title } */}
+                { listingData.title }
             </Box>
-            <Box fontSize="fontSize" m={1}>
-            Description Description Description Description Description Description Description Description Description Description Description Description
-            {/* { listingData.description } */}
+            <Box fontSize="fontSize" m={1}>            
+            { listingData.description }
             </Box>  
             </Typography>            
                 <Button m={1} href="/listings" variant="contained" color="primary" startIcon={<ArrowBackIcon />}>
                 Back to Listings                   
-                </Button>            
-                <p>This is the listing id: {listingId}</p>
+                </Button>
             </Grid>
          </Grid>         
         </Container>
