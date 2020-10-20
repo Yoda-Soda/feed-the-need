@@ -32,7 +32,18 @@ app.post("/", async (req, res) => {
 /****  get /api/listings - get all listing in newest first  ****/
 app.get("/", async (req, res) => {
   try {
-    return res.status(200).send("get route working");
+    const listingsQuery = await pool.query(
+      `SELECT     list.id as listing_id,
+                  user_account.email,
+                  list.title,
+                  list.description,
+                  list.date_created
+      FROM        list
+      INNER JOIN  user_account
+              ON  user_account.id = list.donor_id
+      ORDER  BY   list.date_created DESC;`
+    );
+    return res.status(200).json(listingsQuery.rows);
   } catch (error) {
     console.error(error);
     return res.statusCode(500);
