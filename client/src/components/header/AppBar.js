@@ -7,11 +7,18 @@ import MenuIcon from "@material-ui/icons/Menu";
 import "./AppBar.css";
 import LogoutButton from "../logout-button";
 import { useAuth0 } from "@auth0/auth0-react";
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: 200,
+    padding: 10,
+  },
+}));
 
 const HeaderBar = () => {
+  const classes = useStyles();
   const { user } = useAuth0();
   return (
     <AppBar position="static">
@@ -20,7 +27,11 @@ const HeaderBar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className="title">
-          FEEDtheNEED
+          <img
+            className={classes.root}
+            src="logo.svg"
+            alt="Feed the need logo"
+          />
         </Typography>
         <Link to="/my-listings/add">Add a Listing</Link>
         <span className="email">NAU MAI - WELCOME {user.email} </span>
