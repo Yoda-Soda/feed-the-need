@@ -33,8 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RecipeReviewCard = (props) => {
   const classes = useStyles();
-  const { email } = props;
-  console.log("👋", props);
+  const { id, email, title, description, date_created } = props;
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -44,7 +43,18 @@ const RecipeReviewCard = (props) => {
           </Avatar>
         }
         title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        //get's date and converts to readable format and local time
+        subheader={
+          new Date(date_created).toLocaleDateString("en-gb", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }) +
+          " " +
+          new Intl.DateTimeFormat("en", {
+            timeStyle: "short",
+          }).format(Date.parse(date_created))
+        }
       />
       <CardMedia
         className={classes.media}
