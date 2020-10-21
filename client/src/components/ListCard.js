@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 400,
   },
   media: {
     height: 0,
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  cardwidth: {
+    width: 400,
+  },
 }));
 
 const RecipeReviewCard = (props) => {
@@ -48,6 +51,7 @@ const RecipeReviewCard = (props) => {
     >
       <Card className={classes.root}>
         <CardHeader
+          className={classes.cardwidth}
           avatar={
             <Tooltip title={email} placement="top-start">
               <Avatar
@@ -75,7 +79,7 @@ const RecipeReviewCard = (props) => {
         />
         <CardMedia
           className={classes.media}
-          image="https://images.unsplash.com/photo-1529007328922-d323f83de273?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+          image="placeholder.svg"
           title={title}
         />
         <CardContent>

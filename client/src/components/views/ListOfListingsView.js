@@ -1,57 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ListingCard from "../ListCard";
 import { Container, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-const fetchList = () => {
-  return [
-    {
-      id: 6,
-      email: "michaelbotur@developersinstitute.co.nz",
-      title: "asdfsadfasdf",
-      description: "asdfasdfasdfas",
-      date_created: "2020-10-21T02:44:30.612Z",
-    },
-    {
-      id: 5,
-      email: "michaelbotur@developersinstitute.co.nz",
-      title: "asdfasdf",
-      description: "asdfasdfasdf",
-      date_created: "2020-10-21T00:32:35.670Z",
-    },
-    {
-      id: 4,
-      email: "michaelbotur@developersinstitute.co.nz",
-      title: "asdfsdasdf",
-      description: "asdfasdfsdf",
-      date_created: "2020-10-20T23:58:23.249Z",
-    },
-    {
-      id: 3,
-      email: "michaelbotur@developersinstitute.co.nz",
-      title: "kjdklsfjlsdaf",
-      description: "asdfasdf",
-      date_created: "2020-10-20T02:05:30.133Z",
-    },
-    {
-      id: 2,
-      email: "michaelbotur@developersinstitute.co.nz",
-      title: "string",
-      description:
-        "I have a bountiful amount of cabbages, that I am willing to donate.",
-      date_created: "2020-10-20T00:01:49.541Z",
-    },
-    {
-      id: 1,
-      email: "michaelbotur@developersinstitute.co.nz",
-      title: "My Item",
-      description: "My Item Description",
-      date_created: "2020-10-19T23:56:42.425Z",
-    },
-  ];
-};
-
-const listingsArray = fetchList();
+import { FormatListNumberedRtlRounded } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -61,28 +12,52 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ListOfListingsView = () => {
+  const [listingsData, setListingsData] = useState([{}]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
   const classes = useStyles();
+
+  const getListingsData = async () => {
+    try {
+      const response = await fetch("http://localhost:5123/api/listings");
+      const data = await response.json();
+      setListingsData(data);
+    } catch (error) {
+      console.error(error.message);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getListingsData();
+  }, []);
+
+  if (loading) {
+    return <div>...loading</div>;
+  }
+
+  if (error) {
+    return <div>...error</div>;
+  }
   return (
-    <Grid container spacing={5} justify="center" className={classes.container}>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard {...listingsArray[0]} />
+    <>
+      <Grid
+        container
+        spacing={4}
+        justify="center"
+        className={classes.container}
+      >
+        {listingsData.map((list) => {
+          return (
+            <Grid item sm={12} md={6} lg={4}>
+              <ListingCard {...list}></ListingCard>
+            </Grid>
+          );
+        })}
       </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard {...listingsArray[1]} />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard {...listingsArray[2]} />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard {...listingsArray[3]} />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard {...listingsArray[4]} />
-      </Grid>
-      <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard {...listingsArray[5]} />
-      </Grid>
-    </Grid>
+    </>
   );
 };
 
