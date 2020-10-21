@@ -68,19 +68,19 @@ const ListOfListingsView = () => {
         <ListingCard {...listingsArray[0]} />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard />
+        <ListingCard {...listingsArray[1]} />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard />
+        <ListingCard {...listingsArray[2]} />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard />
+        <ListingCard {...listingsArray[3]} />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard />
+        <ListingCard {...listingsArray[4]} />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <ListingCard />
+        <ListingCard {...listingsArray[5]} />
       </Grid>
     </Grid>
   );
