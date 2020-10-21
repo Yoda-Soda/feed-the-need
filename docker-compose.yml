@@ -39,4 +39,3 @@ services:
       context: ./db
     ports:
       - "6667:5432"
-  
