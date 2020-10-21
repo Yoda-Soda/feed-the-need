@@ -37,7 +37,7 @@ app.get("/", async (req, res) => {
                   user_account.email,
                   list.title,
                   list.description,
-                  list.date_created
+                  list.date_created as "dateCreated"
       FROM        list
       INNER JOIN  user_account
               ON  user_account.id = list.donor_id

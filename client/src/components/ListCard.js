@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const RecipeReviewCard = (props) => {
   const history = useHistory();
   const classes = useStyles();
-  const { id, email, title, description, date_created } = props;
+  const { id, email, title, description, dateCreated } = props;
   return (
     // Makes card clickable
     <ButtonBase
@@ -66,7 +66,7 @@ const RecipeReviewCard = (props) => {
           title={title}
           //gets date and converts to readable format and local time
           subheader={
-            new Date(date_created).toLocaleDateString("en-gb", {
+            new Date(dateCreated).toLocaleDateString("en-gb", {
               year: "numeric",
               month: "long",
               day: "numeric",
@@ -74,7 +74,7 @@ const RecipeReviewCard = (props) => {
             " " +
             new Intl.DateTimeFormat("en", {
               timeStyle: "short",
-            }).format(Date.parse(date_created))
+            }).format(Date.parse(dateCreated))
           }
         />
         <CardMedia
