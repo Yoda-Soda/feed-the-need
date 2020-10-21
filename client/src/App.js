@@ -3,14 +3,9 @@ import "./App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Container } from "@material-ui/core";
 import HeaderBar from "./components/header/AppBar";
-import  AddListingPage  from "./components/views/AddListingPage";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
-
-
+import AddListingPage from "./components/views/AddListingPage";
+import ListOfListingsView from "./components/views/ListOfListingsView";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
@@ -30,13 +25,15 @@ function App() {
     <Router>
       <HeaderBar />
       <Container>
-      <Switch>
-        <Route path="/my-listings/add">
-          <AddListingPage />
-        </Route>
-      </Switch>
-
-    </Container>
+        <Switch>
+          <Route path="/listings">
+            <ListOfListingsView />
+          </Route>
+          <Route path="/my-listings/add">
+            <AddListingPage />
+          </Route>
+        </Switch>
+      </Container>
     </Router>
   );
 }
