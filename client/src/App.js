@@ -4,11 +4,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Container } from "@material-ui/core";
 import HeaderBar from "./components/header/AppBar";
 import  AddListingPage  from "./components/views/AddListingPage";
-import {
+import ViewListingPage from "./components/views/ViewListingPage";
+
+import { 
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from "react-router-dom";
+
 
 
 
@@ -34,8 +37,10 @@ function App() {
         <Route path="/my-listings/add">
           <AddListingPage />
         </Route>
+        <Route path="/listings/:listingId">
+          <ViewListingPage />
+        </Route>
       </Switch>
-
     </Container>
     </Router>
   );
