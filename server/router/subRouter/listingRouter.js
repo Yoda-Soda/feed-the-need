@@ -33,7 +33,7 @@ app.post("/", async (req, res) => {
 app.get("/", async (req, res) => {
   try {
     const listingsQuery = await pool.query(
-      `SELECT     list.id as listing_id,
+      `SELECT     list.id,
                   user_account.email,
                   list.title,
                   list.description,
