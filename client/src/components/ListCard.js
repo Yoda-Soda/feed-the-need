@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
+import { Tooltip } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,9 +39,15 @@ const RecipeReviewCard = (props) => {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {email[0]}
-          </Avatar>
+          <Tooltip title={email} placement="top-start">
+            <Avatar
+              aria-label="recipe"
+              className={classes.avatar}
+              aria-label="add"
+            >
+              {email[0]}
+            </Avatar>
+          </Tooltip>
         }
         title="Shrimp and Chorizo Paella"
         //get's date and converts to readable format and local time
