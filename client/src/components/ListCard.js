@@ -10,7 +10,6 @@ import { red } from "@material-ui/core/colors";
 import { Tooltip } from "@material-ui/core";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
