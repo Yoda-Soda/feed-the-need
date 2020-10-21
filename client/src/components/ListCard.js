@@ -83,7 +83,6 @@ const RecipeReviewCard = (props) => {
             {description}
           </Typography>
         </CardContent>
-        {/* </ButtonBase> */}
       </Card>
     </ButtonBase>
   );
