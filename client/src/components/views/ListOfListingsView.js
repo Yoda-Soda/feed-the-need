@@ -3,6 +3,7 @@ import ListingCard from "../ListCard";
 import { Container, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormatListNumberedRtlRounded } from "@material-ui/icons";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -16,10 +17,17 @@ const ListOfListingsView = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
-
+  const { getAccessTokenSilently } = useAuth0();
   const getListingsData = async () => {
     try {
-      const response = await fetch("http://localhost:5123/api/listings");
+      const myToken = await getAccessTokenSilently();
+      const response = await fetch("http://localhost:5123/api/listings", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${myToken}`,
+        },
+      });
       const data = await response.json();
       setListingsData(data);
     } catch (error) {
