@@ -12,5 +12,4 @@ const jwtCheck = jwt({
   issuer: process.env.AUTH0_URL,
   algorithms: ["RS256"],
 });
-
 module.exports = jwtCheck;
