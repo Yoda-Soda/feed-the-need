@@ -31,15 +31,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RecipeReviewCard = () => {
+const RecipeReviewCard = (props) => {
   const classes = useStyles();
-
+  const { email } = props;
+  console.log("👋", props);
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            {email[0]}
           </Avatar>
         }
         title="Shrimp and Chorizo Paella"
@@ -51,11 +52,11 @@ const RecipeReviewCard = () => {
         title="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        ></Typography>
       </CardContent>
     </Card>
   );
