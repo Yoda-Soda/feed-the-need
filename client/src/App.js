@@ -32,6 +32,12 @@ function App() {
           <Route path="/my-listings/add">
             <AddListingPage />
           </Route>
+          <Route path="/listings">
+            <ListOfListingsView />
+          </Route>
+          <Route path="/">
+            <ListOfListingsView />
+          </Route>
         </Switch>
       </Container>
     </Router>
