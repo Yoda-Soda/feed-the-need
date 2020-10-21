@@ -40,9 +40,10 @@ const RecipeReviewCard = (props) => {
   const classes = useStyles();
   const { id, email, title, description, date_created } = props;
   return (
+    // Makes card clickable
     <ButtonBase
-      //className={props.classes.cardAction}
       onClick={(event) => {
+        // ensures that card navigates to correct view
         history.push(`/listing/${id}`);
       }}
     >
@@ -60,7 +61,7 @@ const RecipeReviewCard = (props) => {
             </Tooltip>
           }
           title={title}
-          //get's date and converts to readable format and local time
+          //gets date and converts to readable format and local time
           subheader={
             new Date(date_created).toLocaleDateString("en-gb", {
               year: "numeric",
