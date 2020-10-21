@@ -45,7 +45,7 @@ paths:
 
   /listings/{listingsId}:
     get:
-      summary: Gets a listing by ID.
+      summary: Gets all listings.
       parameters:
         - in: path
           name: listingsId
