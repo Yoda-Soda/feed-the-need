@@ -1,9 +1,12 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Button,
+} from "@material-ui/core";
 import "./AppBar.css";
 import LogoutButton from "../logout-button";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -14,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: 200,
     padding: 10,
+  },
+  buttonpadding: {
+    margin: 10,
   },
 }));
 
@@ -35,9 +41,16 @@ const HeaderBar = () => {
             />
           </a>
         </Typography>
-
-        <Link to="/my-listings/add">Add a Listing</Link>
-        <span className="email">NAU MAI - WELCOME {user.email} </span>
+        Add a Listing
+        <span className="email">{user.email} </span>
+        <Button
+          className={classes.buttonpadding}
+          variant="contained"
+          color="primary"
+          href="/my-listings/add"
+        >
+          Add Listing
+        </Button>
         <LogoutButton />
       </Toolbar>
     </AppBar>
