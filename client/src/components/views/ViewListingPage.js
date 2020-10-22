@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react"
 import { Container, Button, Grid, Box, Typography, CircularProgress } from "@material-ui/core";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-
 const ViewListingPage = () => {
     const { getAccessTokenSilently } = useAuth0();
-
     const [listingData, setListingData] = useState({});
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-
     const { listingId } = useParams();
-
+    const history = useHistory();
     const getListingData = async () => {
         setLoading(true)
         try {
@@ -72,7 +69,7 @@ const ViewListingPage = () => {
             { listingData.description }
             </Box>  
             </Typography>            
-                <Button m={1} href="/listings" variant="contained" color="primary" startIcon={<ArrowBackIcon />}>
+                <Button m={1} onClick={()=> history.push('/listings')} variant="contained" color="primary" startIcon={<ArrowBackIcon />}>
                 Back to Listings                   
                 </Button>
             </Grid>

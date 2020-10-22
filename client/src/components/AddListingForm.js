@@ -4,6 +4,7 @@ import {
     FormGroup,    
     TextField,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react"
 
 const AddListingForm = () => {    
@@ -12,6 +13,7 @@ const AddListingForm = () => {
     const [listingDescription, setListingDescription] = useState('');
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const history = useHistory();
 
     const postToApi = async() => {
         setLoading(true)
@@ -26,7 +28,8 @@ const AddListingForm = () => {
 
             if(!result.ok) {
                 throw new Error("Could not create Listing")
-            }       
+            }   
+            history.push("/my-listings/add")    
         } catch (e) {
             setError(true)
             console.error(e.message);        
@@ -47,7 +50,7 @@ const AddListingForm = () => {
                 <h2>Add A Listing</h2>
                 <TextField onChange={(e) => setListingTitle(e.target.value)} label="Listing Title" value={listingTitle} margin="normal" variant="outlined" required/>
                 <TextField onChange={(e) => setListingDescription(e.target.value)} label="Listing Description" value={listingDescription} multiline rows={4} margin="normal" variant="outlined"  required/>
-                <Button onClick={postToApi} variant="contained" color="primary" href="/my-listings/add">
+                <Button onClick={postToApi} variant="contained" color="primary">
                     Create Listing
                 </Button>
             </FormGroup>
