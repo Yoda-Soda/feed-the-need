@@ -63,7 +63,8 @@ app.get("/listings/:id", async (req, res) => {
     const singleListing = await pool.query(`SELECT * FROM list WHERE id = $1`, [
       id,
     ]);
-    if (singleListing.rowCount == [null]) {
+   
+    if (singleListing.rowCount == 0) {
       return res.status(404).send("No listing exists with that Id");
     }
 
@@ -71,7 +72,7 @@ app.get("/listings/:id", async (req, res) => {
     // console.log(singleListing.rows);
   } catch (err) {
     console.error(err.message);
-    return res.status(500).send("Database access error");
+    return res.status(500).send("Server error");
   }
 });
 
