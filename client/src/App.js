@@ -17,7 +17,7 @@ function App() {
   if (isLoading) {
     return (
       <div>
-        <img id="loader" src="loader.gif" alt="loading infinity animation" />
+        <img id="loader" src="/loader.gif" alt="loading infinity animation" />
       </div>
     );
   }
