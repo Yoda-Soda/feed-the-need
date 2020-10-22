@@ -9,7 +9,7 @@ import ViewListingPage from "./components/views/ViewListingPage";
 import { 
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route
 } from "react-router-dom";
 
 
