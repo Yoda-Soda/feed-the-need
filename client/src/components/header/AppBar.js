@@ -10,7 +10,7 @@ import {
 import "./AppBar.css";
 import LogoutButton from "../logout-button";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const HeaderBar = () => {
   const classes = useStyles();
   const { user } = useAuth0();
+  const history = useHistory();
   return (
     <AppBar position="static">
       <Toolbar className="bar">
@@ -47,7 +48,7 @@ const HeaderBar = () => {
           className={classes.buttonpadding}
           variant="contained"
           color="primary"
-          href="/my-listings/add"
+          onClick={ () => { history.push("/my-listings/add") }}
         >
           Add Listing
         </Button>
