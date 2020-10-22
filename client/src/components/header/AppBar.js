@@ -27,12 +27,15 @@ const HeaderBar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className="title">
-          <img
-            className={classes.root}
-            src="logo.svg"
-            alt="Feed the need logo"
-          />
+          <a href="/">
+            <img
+              className={classes.root}
+              src="logo.svg"
+              alt="Feed the need logo"
+            />
+          </a>
         </Typography>
+
         <Link to="/my-listings/add">Add a Listing</Link>
         <span className="email">NAU MAI - WELCOME {user.email} </span>
         <LogoutButton />
