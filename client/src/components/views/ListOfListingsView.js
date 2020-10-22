@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import ListingCard from "../ListCard";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,8 +52,8 @@ const ListOfListingsView = () => {
     return <div>...error</div>;
   }
   return (
-    <>
-      <Grid
+    <Fragment  >
+      <Grid        
         container
         spacing={4}
         justify="center"
@@ -61,13 +61,13 @@ const ListOfListingsView = () => {
       >
         {listingsData.map((list) => {
           return (
-            <Grid item sm={12} md={6} lg={4}>
+            <Grid key={list.id} item sm={12} md={6} lg={4}>
               <ListingCard {...list}></ListingCard>
             </Grid>
           );
         })}
       </Grid>
-    </>
+    </Fragment>
   );
 };
 
