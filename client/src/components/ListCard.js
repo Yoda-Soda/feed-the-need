@@ -1,14 +1,17 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-import { Tooltip } from "@material-ui/core";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  Avatar,
+  CardContent,
+  Tooltip,
+  ButtonBase,
+  Typography,
+} from "@material-ui/core";
+
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +49,7 @@ const RecipeReviewCard = (props) => {
     <ButtonBase
       onClick={(event) => {
         // ensures that card navigates to correct view
-        history.push(`/listing/${id}`);
+        history.push(`/listings/${id}`);
       }}
     >
       <Card className={classes.root}>

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ListingCard from "../ListCard";
-import { Container, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { FormatListNumberedRtlRounded } from "@material-ui/icons";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {},
   container: {
     padding: 20,
@@ -21,13 +20,16 @@ const ListOfListingsView = () => {
   const getListingsData = async () => {
     try {
       const myToken = await getAccessTokenSilently();
-      const response = await fetch("http://localhost:5123/api/listings", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${myToken}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/listings`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${myToken}`,
+          },
+        }
+      );
       const data = await response.json();
       setListingsData(data);
     } catch (error) {
