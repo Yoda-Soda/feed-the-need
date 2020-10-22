@@ -6,7 +6,7 @@ services:
     ports:
       - "3333:3000"
     environment:
-      - REACT_APP_API_URL=http://localhost:5123
+      - REACT_APP_API_URL=http://localhost:5123/api
     stdin_open: true
     depends_on:
       - server

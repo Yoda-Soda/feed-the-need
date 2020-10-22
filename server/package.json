@@ -2,7 +2,6 @@
   "name": "api",
   "version": "1.0.0",
   "main": "index.js",
-  "proxy": "http://feedtheneed",
   "scripts": {
     "start": "node -r dotenv/config index.js",
     "dev": "nodemon -e js,yaml -r dotenv/config index.js",
