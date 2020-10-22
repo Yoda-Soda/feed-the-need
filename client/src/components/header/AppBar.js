@@ -36,7 +36,7 @@ const HeaderBar = () => {
           <a href="/">
             <img
               className={classes.root}
-              src="logo.svg"
+              src="/logo.svg"
               alt="Feed the need logo"
             />
           </a>
