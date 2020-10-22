@@ -33,11 +33,11 @@ app.post("/", async (req, res) => {
 app.get("/", async (req, res) => {
   try {
     const listingsQuery = await pool.query(
-      `SELECT     list.id as listing_id,
+      `SELECT     list.id,
                   user_account.email,
                   list.title,
                   list.description,
-                  list.date_created
+                  list.date_created as "dateCreated"
       FROM        list
       INNER JOIN  user_account
               ON  user_account.id = list.donor_id

@@ -115,7 +115,7 @@ components:
       items:
         type: object
         properties:
-          listing_id:
+          id:
             $ref: '#/components/schema/Listings/properties/id'
           email:
             $ref: '#/components/schema/User_account/properties/email'
@@ -123,7 +123,7 @@ components:
             $ref: '#/components/schema/Listings/properties/title'
           description:
             $ref: '#/components/schema/Listings/properties/description'
-          date_created:
+          dateCreated:
             $ref: '#/components/schema/Listings/properties/date_created'
     NewListing:
       type: object
