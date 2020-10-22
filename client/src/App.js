@@ -5,7 +5,12 @@ import { Container } from "@material-ui/core";
 import HeaderBar from "./components/header/AppBar";
 import AddListingPage from "./components/views/AddListingPage";
 import ListOfListingsView from "./components/views/ListOfListingsView";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 function App() {
   const { loginWithRedirect, isLoading, isAuthenticated } = useAuth0();
@@ -26,9 +31,6 @@ function App() {
       <HeaderBar />
       <Container>
         <Switch>
-          <Route path="/listings">
-            <ListOfListingsView />
-          </Route>
           <Route path="/my-listings/add">
             <AddListingPage />
           </Route>
@@ -36,7 +38,7 @@ function App() {
             <ListOfListingsView />
           </Route>
           <Route path="/">
-            <ListOfListingsView />
+            <Redirect to="/listings" />
           </Route>
         </Switch>
       </Container>
