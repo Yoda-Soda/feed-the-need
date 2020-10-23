@@ -5,6 +5,8 @@ import { Container } from "@material-ui/core";
 import HeaderBar from "./components/header/AppBar";
 import AddListingPage from "./components/views/AddListingPage";
 import ListOfListingsView from "./components/views/ListOfListingsView";
+import ViewListingPage from "./components/views/ViewListingPage";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,6 +35,9 @@ function App() {
         <Switch>
           <Route path="/my-listings/add">
             <AddListingPage />
+          </Route>
+          <Route path="/listings/:listingId">
+            <ViewListingPage />
           </Route>
           <Route path="/listings">
             <ListOfListingsView />

@@ -23,9 +23,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schema/NewListing'
-              type:
-                object
+              $ref: "#/components/schema/NewListing"
+              type: object
               properties:
                 donor_id: integer
                 title: string
@@ -37,16 +36,16 @@ paths:
       responses: 
         '201':
           description: OK - Listing has been listed
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/ServerError'
-        '404':
-          $ref: '#/components/responses/NotFound'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "404":
+          $ref: "#/components/responses/NotFound"
       tag:
-      - listings
+        - listings
 
     get:
       summary: Returns all listings ordered by newest first
@@ -66,15 +65,36 @@ paths:
           $ref: '#/components/responses/ServerError'
         '404':
           $ref: '#/components/responses/NotFound'
+  /listings/{listingsId}:
+    get:
+      summary: Gets a listing by ID.
+      parameters:
+        - in: path
+          name: listingsId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the listing to get
+      responses:
+        "200":
+          description: your selected listing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schema/Listings"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
 components:
   responses:
     BadRequest:
-        description: Bad Request - missing parameter/s
+      description: Bad Request - missing parameter/s
     Unauthorized:
-        description: Unauthorized
+      description: Unauthorized
     ServerError:
-        description: Server Errors
+      description: Server Errors
     NotFound:
       description: Not Found
   schema:
@@ -100,42 +120,17 @@ components:
           example: I have a bountiful amount of cabbages, that I am willing to donate.
         date_created:
           type: date-time
-          example: "2020-10-20T02:05:30.133Z"
-    User_account:
-      properties:
-        id:
-          type: integer
-          primary: true
-        email:
-          type: string
-          example: thecabbageking@hotmail.com
-# Route schemas
-    ArrayOfListings:
-      type: array
-      items:
-        type: object
-        properties:
-          id:
-            $ref: '#/components/schema/Listings/properties/id'
-          email:
-            $ref: '#/components/schema/User_account/properties/email'
-          title:
-            $ref: '#/components/schema/Listings/properties/title'
-          description:
-            $ref: '#/components/schema/Listings/properties/description'
-          dateCreated:
-            $ref: '#/components/schema/Listings/properties/date_created'
     NewListing:
       type: object
       required:
-        $ref: '#/components/schema/Listings/required'
+        $ref: "#/components/schema/Listings/required"
       properties:
         donor_id:
-          $ref: '#/components/schema/Listings/properties/donor_id'
+          $ref: "#/components/schema/Listings/properties/donor_id"
         title:
-          $ref: '#/components/schema/Listings/properties/title'
+          $ref: "#/components/schema/Listings/properties/title"
         description:
-          $ref: '#/components/schema/Listings/properties/description'
+          $ref: "#/components/schema/Listings/properties/description"
   securitySchemes:
     bearerAuth:
       type: http

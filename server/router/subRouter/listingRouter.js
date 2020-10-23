@@ -50,4 +50,32 @@ app.get("/", async (req, res) => {
   }
 });
 
+/****  Get One request /api/listings/{id} ****/
+
+app.get("/:id", async (req, res) => {
+  console.log("get one route confirmed");
+
+  try {
+    const { id } = req.params;
+    console.log(id);
+    if (!isPositiveInt(id)) {
+      return res.status(400).send("Bad Request - id is not a positiveInt");
+    }
+
+    const singleListing = await pool.query(`SELECT * FROM list WHERE id = $1`, [
+      id,
+    ]);
+
+    if (singleListing.rowCount == 0) {
+      return res.status(404).send("No listing exists with that Id");
+    }
+
+    res.json(singleListing.rows[0]);
+    // console.log(singleListing.rows);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send("Server error");
+  }
+});
+
 module.exports = app;
