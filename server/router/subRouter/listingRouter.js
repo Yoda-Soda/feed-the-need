@@ -62,9 +62,11 @@ app.get("/:id", async (req, res) => {
       return res.status(400).send("Bad Request - id is not a positiveInt");
     }
 
-    const singleListing = await pool.query(`SELECT * FROM list WHERE id = $1`, [
-      id,
-    ]);
+    const singleListing = await pool.query(
+      `SELECT id, donor_id as "donorId", title, description, date_created as "dateCreated"
+      FROM list WHERE id = $1`,
+      [id]
+    );
 
     if (singleListing.rowCount == 0) {
       return res.status(404).send("No listing exists with that Id");
