@@ -62,7 +62,7 @@ const RecipeReviewCard = (props) => {
                 className={classes.avatar}
                 aria-label="add"
               >
-                {email[0]}
+                {email[0].toUpperCase()}
               </Avatar>
             </Tooltip>
           }
