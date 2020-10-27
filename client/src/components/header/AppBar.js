@@ -1,18 +1,32 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Button,
+} from "@material-ui/core";
 import "./AppBar.css";
 import LogoutButton from "../logout-button";
 import { useAuth0 } from "@auth0/auth0-react";
-import {
-  Link
-} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: 200,
+    padding: 10,
+  },
+  buttonpadding: {
+    margin: 10,
+  },
+}));
 
 const HeaderBar = () => {
+  const classes = useStyles();
   const { user } = useAuth0();
+  const history = useHistory();
   return (
     <AppBar position="static">
       <Toolbar className="bar">
@@ -20,10 +34,24 @@ const HeaderBar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className="title">
-          FEEDtheNEED
+          <a href="/">
+            <img
+              className={classes.root}
+              src="/logo.svg"
+              alt="Feed the need logo"
+            />
+          </a>
         </Typography>
-        <Link to="/my-listings/add">Add a Listing</Link>
-        <span className="email">NAU MAI - WELCOME {user.email} </span>
+        Add a Listing
+        <span className="email">{user.email} </span>
+        <Button
+          className={classes.buttonpadding}
+          variant="contained"
+          color="primary"
+          onClick={ () => { history.push("/my-listings/add") }}
+        >
+          Add Listing
+        </Button>
         <LogoutButton />
       </Toolbar>
     </AppBar>
