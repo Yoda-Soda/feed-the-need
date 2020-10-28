@@ -33,8 +33,8 @@ paths:
                 - donorId
                 - title
                 - description
-      responses: 
-        '201':
+      responses:
+        "201":
           description: OK - Listing has been listed
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -51,20 +51,20 @@ paths:
       summary: Returns all listings ordered by newest first
       produces:
         - application/json
-      description: 
-      responses: 
-        '200':
+      description:
+      responses:
+        "200":
           description: A JSON array of listings
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/ArrayOfListings'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '500':
-          $ref: '#/components/responses/ServerError'
-        '404':
-          $ref: '#/components/responses/NotFound'
+                $ref: "#/components/schema/ArrayOfListings"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "404":
+          $ref: "#/components/responses/NotFound"
 
   /listings/{listingsId}:
     get:
@@ -119,7 +119,7 @@ components:
     NotFound:
       description: Not Found
   schema:
-# DB-table schemas
+    # DB-table schemas
     Listings:
       type: object
       required:
@@ -139,9 +139,14 @@ components:
         description:
           type: string
           example: I have a bountiful amount of cabbages, that I am willing to donate.
+        claimant_id:
+          type: integer
         date_created:
           type: date-time
           example: "2020-10-20T02:05:30.133Z"
+        date_claimed:
+          type: date-time
+          example: "2020-10-28T02:13:18.212Z"
     User_account:
       properties:
         id:
@@ -150,22 +155,22 @@ components:
         email:
           type: string
           example: thecabbageking@hotmail.com
-# Route schemas
+    # Route schemas
     ArrayOfListings:
       type: array
       items:
         type: object
         properties:
           id:
-            $ref: '#/components/schema/Listings/properties/id'
+            $ref: "#/components/schema/Listings/properties/id"
           email:
-            $ref: '#/components/schema/User_account/properties/email'
+            $ref: "#/components/schema/User_account/properties/email"
           title:
-            $ref: '#/components/schema/Listings/properties/title'
+            $ref: "#/components/schema/Listings/properties/title"
           description:
-            $ref: '#/components/schema/Listings/properties/description'
+            $ref: "#/components/schema/Listings/properties/description"
           dateCreated:
-            $ref: '#/components/schema/Listings/properties/date_created'
+            $ref: "#/components/schema/Listings/properties/date_created"
     NewListing:
       type: object
       required:
