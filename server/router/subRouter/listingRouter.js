@@ -102,4 +102,28 @@ app.get("/:id", async (req, res) => {
   }
 });
 
+app.get("/:id", async (req, res) => {
+  console.log("Sending email between donor and claimant");
+  try {
+    const { id } = req.params;
+    console.log(id);
+    if (!isPositiveInt(id)) {
+      return res.status(400).send("Can't email regarding listing- id is not a positiveInt");
+    }
+    const singleListing = await pool.query(
+      `SELECT id, donor_id as "donorId", title, description, date_created as "dateCreated"
+      FROM list WHERE id = $1`,
+      [id]
+    );
+    if (singleListing.rowCount == 0) {
+      return res.status(404).send("No listing exists with that Id");
+    }
+    res.json(singleListing.rows[0]);
+    // console.log(singleListing.rows);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send("Server error");
+  }
+});
+
 module.exports = app;
