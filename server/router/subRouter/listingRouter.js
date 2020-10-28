@@ -2,6 +2,7 @@ const express = require("express");
 const app = express.Router();
 const pool = require("../../db");
 const { isPositiveInt } = require("../router_utilities/is_positive_integer");
+const { claimListing } = require("../../dataAccess/listingsRepository");
 
 /****  post /api/listings - post single listing  ****/
 app.post("/", async (req, res) => {
@@ -97,6 +98,42 @@ app.get("/:id", async (req, res) => {
   } catch (err) {
     console.error(err.message);
     return res.status(500).send("Server error");
+  }
+});
+
+// claim a listing
+app.patch("/:id", async (req, res) => {
+  
+  // listing id
+  const listingId = req.params.id;
+  const email = req.user[`http://feedtheneed.click/email`];
+  console.log(req.user[`http://feedtheneed.click/email`])
+
+  // if any of the fields are missing, send error
+  if ( listingId === undefined ||  email === undefined ) {
+    return res.status(400).send("Bad Request - missing parameter/s");
+  }
+  // if any fields ( ie client ID field) are invalid send error
+  // don't need to check email field as it will be reliable, from Auth0
+  if (!isPositiveInt(listingId)) {
+    return res.status(400).send("Bad Request - id is not a positiveInt");
+  }
+  // TEMP - to be removed
+  const getIdByEmail = () => {
+    return 4;
+  }
+  
+  try {
+    // get the claimant ID from the claimer user's email
+    let claimantId = getIdByEmail(email);
+    console.log(claimantId)
+
+    claimListing(listingId, email);
+    // no need to check if there is a db result, as it will be sent to catch if it fails 
+    return res.status(200).send("OK - list was updated" );
+  } catch (e) {
+    console.error(err.message);
+    return res.status(500).send("Could not claim item");
   }
 });
 
