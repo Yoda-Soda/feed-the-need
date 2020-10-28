@@ -72,6 +72,9 @@ const ViewListingPage = () => {
                 <Button m={1} onClick={()=> history.push('/listings')} variant="contained" color="primary" startIcon={<ArrowBackIcon />}>
                 Back to Listings                   
                 </Button>
+                <Button m={1} onClick={()=> 'Thanks, email sent'} variant="contained" color="black" startIcon={<ArrowBackIcon />}>
+                Claim listing. This button should email both lister and claimant.                  
+                </Button>
             </Grid>
          </Grid>         
         </Container>
