@@ -5,11 +5,18 @@ sgMail.setApiKey('SG.9WTmHbVWRCOlCka6Wc8Rdg.syjIaSqY66_rAtu018G4MzKO-6rSTX5S9P6R
 //this code is set up to find best method to email the donor and recipient
 //It will eventually has SQL template strings with which to inject the email addresses of donor and claimant
 const msg = {
-  to: 'michaelbotur@developersinstitute.co.nz', // Change to your recipient
-  from: 'michaelbotur@developersinstitute.co.nz', // Changed to  verified sender
+  to: 'michaelbotur@developersinstitute.co.nz', //  recipient
+  from: 'michaelbotur@developersinstitute.co.nz', // sender
   subject: "If test disposable branch working, SENDS TO TWO EMAIL ADDRESSES. A listing has been claimed. Please arrange handover from donor to claimant/ recipient.",
   text: "An item has been claimed by a donor. Please arrange hand-over. The details of the listing + donor + recipient are ______.  ",
 }
+
+// const pseudocodeemail = {
+//   to: '`${listing.user}`', 
+//   from: '${listing.donor}', // sender
+//   subject: "Listing claimed. Please arrange handover.",
+//   text: "Please arrange hand-over. The details are `${listing.id}` `${listing.user}` `${listing.email}`.  ",
+// }
 
 const secondMsg = {
   to: 'michaelbotur@gmail.com', 
@@ -21,7 +28,7 @@ const secondMsg = {
 sgMail
   .send(msg)
   .then(() => {
-    console.log('WEDS NIGHT EMAIL SENT TO TWO EMAIL ADDRESSES')
+    console.log('EMAIL has been SENT TO TWO 2 EMAIL ADDRESSES')
   })
   .catch((error) => {
     console.error(error)
@@ -30,7 +37,7 @@ sgMail
 sgMail
   .send(secondMsg)
   .then(() => {
-    console.log('WEDS NIGHT EMAIL SENT TO TWO 2 EMAIL ADDRESSES CODED BY MIKE')
+    console.log('EMAIL has been SENT TO TWO 2 EMAIL ADDRESSES')
   })
   .catch((error) => {
     console.error(error)

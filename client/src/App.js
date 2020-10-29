@@ -42,9 +42,9 @@ function App() {
           </Route>
           <Route path="/listings">
             <ListOfListingsView />
-          </Route>
+          {/* </Route>
             <Route path="/listings/:listingId/email">
-            <sgMail />
+            <sgMail /> */}
           </Route>
           <Route path="/">
             <Redirect to="/listings" />
