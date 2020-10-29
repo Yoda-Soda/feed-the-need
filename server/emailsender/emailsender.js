@@ -47,4 +47,3 @@ sgMail
   //Mike will need to set up SQL to insert the email that goes with a donor and recipient's listing
 
   // export default sgMail;
-

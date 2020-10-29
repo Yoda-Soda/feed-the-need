@@ -58,10 +58,12 @@ app.get("/", async (req, res) => {
                   list.title,
                   list.description,
                   list.date_created as "dateCreated"
+                  
       FROM        list
       INNER JOIN  user_account
-              ON  user_account.id = list.donor_id
-      ORDER  BY   list.date_created DESC;`
+      ON  user_account.id = list.donor_id
+      WHERE claimant_id is NULL
+      ORDER BY list.date_created DESC;`
     );
     return res.status(200).json(listingsQuery.rows);
   } catch (error) {
