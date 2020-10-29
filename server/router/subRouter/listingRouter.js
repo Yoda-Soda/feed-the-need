@@ -2,6 +2,8 @@ const express = require("express");
 const app = express.Router();
 const pool = require("../../db");
 const { isPositiveInt } = require("../router_utilities/is_positive_integer");
+const userRepostory = require("../DataAccess")
+const getUserIdByEmail = require("../DataAccessuserRepository");
 
 /****  post /api/listings - post single listing  ****/
 app.post("/", async (req, res) => {
@@ -19,25 +21,9 @@ app.post("/", async (req, res) => {
     if (!isPositiveInt(donor_id)) {
       return res.status(400).send("Bad Request - donor_id is not positiveInt");
     }
-    let userId;
-    const dbResult = await pool.query(
-      `SELECT id from user_account where email = $1`,
-      [email]
-    );
-
-    if (!dbResult.rows[0]) {
-      //user does not exist, add it!
-      const insertResult = await pool.query(
-        `INSERT INTO user_account (email) VALUES ($1) returning id`,
-        [email]
-      );
-      userId = insertResult.rows[0].id;
-    } else {
-      userId = dbResult.rows[0].id;
-    }
-
-    // case where no user exists!
-
+//This has been refactored to userRepository
+     const userId = await getUserIdByEmail(email);
+    
     const newlisting = await pool.query(
       `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
       [userId, title, description]
@@ -99,5 +85,6 @@ app.get("/:id", async (req, res) => {
     return res.status(500).send("Server error");
   }
 });
+//CGP-50
 
 module.exports = app;
