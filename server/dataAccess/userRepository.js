@@ -18,4 +18,4 @@
       }
     return userId ;
     };
-module.exports = getUserIdByEmail;
+module.exports = { getUserIdByEmail };
