@@ -121,8 +121,9 @@ app.patch("/:id", async (req, res) => {
     return res.status(400).send("Bad Request - id is not a positiveInt");
   }
   // TEMP - to be removed
+  // replace this placeholder function with the real one
   const getIdByEmail = () => {
-    return 4;
+    return 1;
   }
   
   try {
@@ -130,10 +131,11 @@ app.patch("/:id", async (req, res) => {
     let claimantId = getIdByEmail(email);
     console.log(claimantId)
 
-    claimListing(listingId, email);
-    // no need to check if there is a db result, as it will be sent to catch if it fails 
+    await claimListing(listingId, claimantId);
+    // no need to check if there is a db result, as it will be sent to catch if it fails
+
     return res.status(200).send("OK - list was updated" );
-  } catch (e) {
+  } catch (err) {    
     console.error(err.message);
     return res.status(500).send("Could not claim item");
   }
