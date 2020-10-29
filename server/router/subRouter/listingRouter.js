@@ -147,7 +147,9 @@ app.get("/:id", async (req, res) => {
     const { id } = req.params;
     console.log(id);
     if (!isPositiveInt(id)) {
-      return res.status(400).send("Can't email regarding listing- id is not a positiveInt");
+      return res
+        .status(400)
+        .send("Can't email regarding listing- id is not a positiveInt");
     }
     const singleListing = await pool.query(
       `SELECT id, donor_id as "donorId", title, description, date_created as "dateCreated"
