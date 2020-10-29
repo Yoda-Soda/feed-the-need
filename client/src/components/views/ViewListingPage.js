@@ -3,6 +3,10 @@ import { useParams, useHistory } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react"
 import { Container, Button, Grid, Box, Typography, CircularProgress } from "@material-ui/core";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+
+import ConfirmationDialog from "../claimlistingbutton";
+
 
 const ViewListingPage = () => {
     const { getAccessTokenSilently } = useAuth0();
@@ -69,11 +73,11 @@ const ViewListingPage = () => {
             { listingData.description }
             </Box>  
             </Typography>            
-                <Button m={1} onClick={()=> history.push('/listings')} variant="contained" color="primary" startIcon={<ArrowBackIcon />}>
+                <Button m={1} onClick={()=> history.push('/listings')} variant="contained" color="secondary" startIcon={<ArrowBackIcon />}>
                 Back to Listings                   
                 </Button>
-                <Button m={1} onClick={()=> 'Thanks, email sent'} variant="contained" color="black" startIcon={<ArrowBackIcon />}>
-                Claim listing. This button should email both lister and claimant.                  
+                <Button m={1} onClick={()=> ConfirmationDialog} variant="contained" color="primary" startIcon={<ArrowForwardIcon />}>
+                Claim listing and email lister and claimant.                  
                 </Button>
             </Grid>
          </Grid>         
@@ -82,3 +86,9 @@ const ViewListingPage = () => {
 }
 
 export default ViewListingPage;
+
+// ClaimListingButton
+// //SO MIKE WHAT'S HAPPENING HERE IS YOU'RE TRYING TO CALL THROUGH THE CLAIM LISTING FUNCTION THAT GOES WITH THIS BUTTON; 
+// YOU HAVE A SEPARATE SCRIPT FOR YOUR CLAIM LISTING BUTTON
+// That separate script is where your eventhandler or useState should be scripted. 
+//Not here. (nice to see function colour for ClaimListingButton)
