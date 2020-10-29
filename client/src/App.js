@@ -6,6 +6,7 @@ import HeaderBar from "./components/header/AppBar";
 import AddListingPage from "./components/views/AddListingPage";
 import ListOfListingsView from "./components/views/ListOfListingsView";
 import ViewListingPage from "./components/views/ViewListingPage";
+// import sgMail from "./emailsender/emailsender.js";
 
 import {
   BrowserRouter as Router,
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path="/listings">
             <ListOfListingsView />
+          </Route>
+            <Route path="/listings/:listingId/email">
+            <sgMail />
           </Route>
           <Route path="/">
             <Redirect to="/listings" />

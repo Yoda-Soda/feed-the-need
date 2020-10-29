@@ -59,10 +59,12 @@ app.get("/", async (req, res) => {
                   list.title,
                   list.description,
                   list.date_created as "dateCreated"
+                  
       FROM        list
       INNER JOIN  user_account
-              ON  user_account.id = list.donor_id
-      ORDER  BY   list.date_created DESC;`
+      ON  user_account.id = list.donor_id
+      WHERE claimant_id is NULL
+      ORDER BY list.date_created DESC;`
     );
     return res.status(200).json(listingsQuery.rows);
   } catch (error) {
@@ -134,6 +136,30 @@ app.patch("/:id", async (req, res) => {
   } catch (e) {
     console.error(err.message);
     return res.status(500).send("Could not claim item");
+  }
+});
+
+app.get("/:id", async (req, res) => {
+  console.log("Sending email between donor and claimant");
+  try {
+    const { id } = req.params;
+    console.log(id);
+    if (!isPositiveInt(id)) {
+      return res.status(400).send("Can't email regarding listing- id is not a positiveInt");
+    }
+    const singleListing = await pool.query(
+      `SELECT id, donor_id as "donorId", title, description, date_created as "dateCreated"
+      FROM list WHERE id = $1`,
+      [id]
+    );
+    if (singleListing.rowCount == 0) {
+      return res.status(404).send("No listing exists with that Id");
+    }
+    res.json(singleListing.rows[0]);
+    // console.log(singleListing.rows);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send("Server error");
   }
 });
 
