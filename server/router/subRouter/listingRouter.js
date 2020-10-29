@@ -117,15 +117,7 @@ app.patch("/:id", async (req, res) => {
     // for updating non-existent items
     if (resultFromDb.rowCount == 0) {           
       return res.status(404).send("Not Found");
-  }
-
-    console.log()
-
-
-    // if() {
-
-    // }
-
+    }
     return res.status(200).send("OK - list was updated" );
   } catch (err) {    
     console.error(err.message);
