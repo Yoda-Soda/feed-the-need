@@ -3,6 +3,7 @@ const app = express.Router();
 const pool = require("../../db");
 const { isPositiveInt } = require("../router_utilities/is_positive_integer");
 const { claimListing } = require("../../dataAccess/listingsRepository");
+const getUserIdByEmail = require("../../dataAccess/userRepository");
 
 /****  post /api/listings - post single listing  ****/
 app.post("/", async (req, res) => {
@@ -20,25 +21,9 @@ app.post("/", async (req, res) => {
     if (!isPositiveInt(donor_id)) {
       return res.status(400).send("Bad Request - donor_id is not positiveInt");
     }
-    let userId;
-    const dbResult = await pool.query(
-      `SELECT id from user_account where email = $1`,
-      [email]
-    );
-
-    if (!dbResult.rows[0]) {
-      //user does not exist, add it!
-      const insertResult = await pool.query(
-        `INSERT INTO user_account (email) VALUES ($1) returning id`,
-        [email]
-      );
-      userId = insertResult.rows[0].id;
-    } else {
-      userId = dbResult.rows[0].id;
-    }
-
-    // case where no user exists!
-
+//This has been refactored to userRepository
+     const userId = await getUserIdByEmail(email);
+    
     const newlisting = await pool.query(
       `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
       [userId, title, description]
@@ -87,7 +72,7 @@ app.get("/:id", async (req, res) => {
 
     const singleListing = await pool.query(
       `SELECT id, donor_id as "donorId", title, description, date_created as "dateCreated"
-      FROM list WHERE id = $1`,
+      FROM list WHERE id = $1 AND claimant_id IS NULL `,
       [id]
     );
 
@@ -102,6 +87,7 @@ app.get("/:id", async (req, res) => {
     return res.status(500).send("Server error");
   }
 });
+//CGP-50
 
 // claim a listing
 app.patch("/:id", async (req, res) => {
@@ -122,13 +108,13 @@ app.patch("/:id", async (req, res) => {
   }
   // TEMP - to be removed
   // replace this placeholder function with the real one
-  const getIdByEmail = () => {
-    return 1;
-  }
+  // const getIdByEmail = () => {
+  //   return 1;
+  // }
   
   try {
     // get the claimant ID from the claimer user's email
-    let claimantId = getIdByEmail(email);
+    let claimantId = await getUserIdByEmail(email);
     console.log(claimantId)
 
     await claimListing(listingId, claimantId);
