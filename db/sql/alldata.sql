@@ -1,3 +1,4 @@
+
 CREATE TABLE user_account
 (
 	id SERIAL PRIMARY KEY,
@@ -15,7 +16,7 @@ values
 CREATE TABLE list
 (
 	id SERIAL PRIMARY KEY,
-	donor_id int NOT NULL,.
+	donor_id int NOT NULL,
 	title TEXT NOT NULL,
 	date_created TIMESTAMP DEFAULT NOW(),
 	claimant_id int REFERENCES user_account(id),
