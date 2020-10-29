@@ -107,6 +107,33 @@ paths:
           $ref: "#/components/responses/BadRequest"
         "404":
           $ref: "#/components/responses/NotFound"
+    patch:
+      summary: Updates a listing to become claimed.
+      parameters:
+        - name: listingsId
+          schema:
+            type: integer
+          in: path
+          description: id of listing to update.
+          required: true
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK - list was updated
+        '400':
+          description: Bad Request - id is not a positiveInt
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          description: Could not claim item
+      tag:
+        - listings
+
 
 components:
   responses:

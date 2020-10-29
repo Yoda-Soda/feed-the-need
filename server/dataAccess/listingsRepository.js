@@ -5,6 +5,7 @@ const claimListing = async (listingId, claimantId)  => {
         `UPDATE list SET claimant_id = $2, date_claimed = CURRENT_TIMESTAMP WHERE id = $1 RETURNING id listing_id, claimant_id;`,
         [listingId, claimantId]
       );
+      return dbResult;
 }
 
 const getDonatorEmailByListingId = async (listingId)  => {
