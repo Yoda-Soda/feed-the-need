@@ -106,19 +106,25 @@ app.patch("/:id", async (req, res) => {
   if (!isPositiveInt(listingId)) {
     return res.status(400).send("Bad Request - id is not a positiveInt");
   }
-  // TEMP - to be removed
-  // replace this placeholder function with the real one
-  // const getIdByEmail = () => {
-  //   return 1;
-  // }
   
   try {
     // get the claimant ID from the claimer user's email
     let claimantId = await getUserIdByEmail(email);
     console.log(claimantId)
 
-    await claimListing(listingId, claimantId);
-    // no need to check if there is a db result, as it will be sent to catch if it fails
+    const resultFromDb = await claimListing(listingId, claimantId);
+    // actually, need to check if there is a db rows result returned on success, otherwise SQL will still send you an "okay"
+    // for updating non-existent items
+    if (resultFromDb.rowCount == 0) {           
+      return res.status(404).send("Not Found");
+  }
+
+    console.log()
+
+
+    // if() {
+
+    // }
 
     return res.status(200).send("OK - list was updated" );
   } catch (err) {    
