@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react"
-import { Container, Button, Grid, Box, Typography, CircularProgress } from "@material-ui/core";
+import { Container, Button, Grid, Box, Typography, CircularProgress ,Dialog} from "@material-ui/core";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-import ConfirmationDialog from "../claimlistingbutton";
+
 
 
 const ViewListingPage = () => {
@@ -13,8 +13,26 @@ const ViewListingPage = () => {
     const [listingData, setListingData] = useState({});
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [showDialog, setShowDialog] = useState(false);
     const { listingId } = useParams();
     const history = useHistory();
+    const claimListing = async () => {
+        setLoading(true)
+        try {
+            const myToken = await getAccessTokenSilently();            
+            const result = await fetch(`${process.env.REACT_APP_API_URL}/listings/${listingId}`,            
+            { method:'PATCH' ,headers: {"Content-Type": "application/json", 'Authorization' : `Bearer ${myToken}` }})
+            if (!result.ok) {
+               throw new Error("Could not claim Listing");
+            } 
+            setShowDialog(true);
+        } catch (e) {
+            setError(true)
+            console.error(e.message);
+        } finally {
+            setLoading(false)
+        }
+    }
     const getListingData = async () => {
         setLoading(true)
         try {
@@ -47,6 +65,10 @@ const ViewListingPage = () => {
     const h1 = {
         fontSize: '48px'
     };
+
+    if(showDialog) {
+        return <div>you claimed it </div>
+    }
    
     if(loading) {
         return (
@@ -76,8 +98,8 @@ const ViewListingPage = () => {
                 <Button m={1} onClick={()=> history.push('/listings')} variant="contained" color="secondary" startIcon={<ArrowBackIcon />}>
                 Back to Listings                   
                 </Button>
-                <Button m={1} onClick={()=> ConfirmationDialog} variant="contained" color="primary" startIcon={<ArrowForwardIcon />}>
-                Claim listing and email lister and claimant.                  
+                <Button m={1} onClick={()=> claimListing()} variant="contained" color="primary" startIcon={<ArrowForwardIcon />}>
+                Claim listing.                  
                 </Button>
             </Grid>
          </Grid>         
