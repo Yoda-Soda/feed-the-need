@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.EXPRESS_PORT || 5000;
+const port = process.env.PORT || 5000;
 const morgan = require("morgan");
 const jwtCheck = require("./jwt-check");
 const swaggerUi = require("swagger-ui-express");
