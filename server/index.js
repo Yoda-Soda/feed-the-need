@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api", jwtCheck, apiRouter);
-app.use('/', express.static('ui'))
+app.use('/', express.static(path.join(__dirname,"./ui/index.html")))
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
