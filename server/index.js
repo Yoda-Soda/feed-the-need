@@ -1,15 +1,16 @@
 const express = require("express");
 const app = express();
-const port = process.env.EXPRESS_PORT || 5000;
+const port = process.env.PORT || 5000;
 const morgan = require("morgan");
 const jwtCheck = require("./jwt-check");
 const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
-const swaggerDocument = YAML.load("./swagger.yaml");
+const path = require("path")
+const swaggerDocument = YAML.load(path.join(__dirname,"./swagger.yaml"));
 const apiRouter = require("./router/api_router");
 const cors = require("cors");
 
-app.use(morgan("tiny"));
+//app.use(morgan("tiny"));
 app.use(cors());
 
 app.use(express.json());
