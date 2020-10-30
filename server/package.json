@@ -6,7 +6,7 @@
     "start": "node -r dotenv/config index.js",
     "dev": "nodemon -e js,yaml -r dotenv/config index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-prebuild":"cd client && npm install && npm run build"
   },
   "engines": {
     "node": "12.x"
