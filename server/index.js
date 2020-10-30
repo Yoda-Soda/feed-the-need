@@ -12,11 +12,14 @@ const cors = require("cors");
 
 //app.use(morgan("tiny"));
 app.use(cors());
-
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api", jwtCheck, apiRouter);
-app.use('*', express.static(path.join(__dirname,"ui")))
+
+app.use(express.static(path.join(__dirname, 'ui')));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
