@@ -7,6 +7,6 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "build": "cd server && npm install && cd ../client/ && npm install && npm build && cp -r  build ../server/ui"
+    "build": "cd server && npm install && cd ../client/ && npm install && npm run build && cp -r  build ../server/ui"
   }
 }
