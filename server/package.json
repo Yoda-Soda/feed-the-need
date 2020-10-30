@@ -8,6 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "license": "MIT",
   "dependencies": {
     "@sendgrid/mail": "^7.3.0",
