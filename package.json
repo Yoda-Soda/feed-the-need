@@ -7,6 +7,6 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "build": "cd client/ && yarn install && yarn build && cp -r  build ../server/ui"
+    "build": "cd server && yarn install && cd ../client/ && yarn install && yarn build && cp -r  build ../server/ui"
   }
 }
