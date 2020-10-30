@@ -6,7 +6,7 @@
     "node": "12.x"
   },
   "scripts": {
-    "start": "node server",
+    "start": "node server/index.js",
     "build": "cd client/ && yarn install && yarn build && cp -r  build ../server/ui"
   }
 }
