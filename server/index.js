@@ -9,7 +9,7 @@ const swaggerDocument = YAML.load("./swagger.yaml");
 const apiRouter = require("./router/api_router");
 const cors = require("cors");
 
-app.use(morgan("tiny"));
+//app.use(morgan("tiny"));
 app.use(cors());
 
 app.use(express.json());
