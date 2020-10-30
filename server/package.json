@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node -r dotenv/config index.js",
     "dev": "nodemon -e js,yaml -r dotenv/config index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-prebuild":"cd ../client && npm install && npm run build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
     "node": "12.x"
