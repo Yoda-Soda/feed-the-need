@@ -27,4 +27,22 @@ const createNewListing = async (donor_id, title, description) => {
   );
 }
 
-module.exports = { claimListing, getDonatorEmailByListingId, createNewListing }
+// get all listings
+const getAllListings = async () => {
+  const listingsQuery = await pool.query(
+    `SELECT     list.id,
+                user_account.email,
+                list.title,
+                list.description,
+                list.date_created as "dateCreated"
+                
+    FROM        list
+    INNER JOIN  user_account
+    ON  user_account.id = list.donor_id
+    WHERE claimant_id is NULL
+    ORDER BY list.date_created DESC;`
+  );
+  return listingsQuery;
+}
+
+module.exports = { claimListing, getDonatorEmailByListingId, createNewListing, getAllListings }
