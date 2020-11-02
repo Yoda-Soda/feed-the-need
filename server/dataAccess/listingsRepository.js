@@ -45,4 +45,16 @@ const getAllListings = async () => {
   return listingsQuery;
 }
 
-module.exports = { claimListing, getDonatorEmailByListingId, createNewListing, getAllListings }
+// get one listing
+
+const getOneListing = async (id) => {
+  const singleListing = await pool.query(
+    `SELECT id, donor_id as "donorId", title, description, date_created as "dateCreated"
+    FROM list WHERE id = $1 AND claimant_id IS NULL `,
+    [id]
+  );
+  return singleListing;
+
+}
+
+module.exports = { claimListing, getDonatorEmailByListingId, createNewListing, getAllListings, getOneListing }

@@ -2,7 +2,7 @@ const express = require("express");
 const app = express.Router();
 const pool = require("../../db");
 const { isPositiveInt } = require("../router_utilities/is_positive_integer");
-const { claimListing , getDonatorEmailByListingId, createNewListing, getAllListings } = require("../../dataAccess/listingsRepository");
+const { claimListing , getDonatorEmailByListingId, createNewListing, getAllListings, getOneListing } = require("../../dataAccess/listingsRepository");
 const { getUserIdByEmail } = require("../../dataAccess/userRepository");
 const {notifyListingParticipants} = require("../../emailsender/emailsender");
 
@@ -61,11 +61,8 @@ app.get("/:id", async (req, res) => {
       return res.status(400).send("Bad Request - id is not a positiveInt");
     }
 
-    const singleListing = await pool.query(
-      `SELECT id, donor_id as "donorId", title, description, date_created as "dateCreated"
-      FROM list WHERE id = $1 AND claimant_id IS NULL `,
-      [id]
-    );
+    // get one listing
+    const singleListing = await getOneListing(id);  
 
     if (singleListing.rowCount == 0) {
       return res.status(404).send("No listing exists with that Id");
