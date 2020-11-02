@@ -2,7 +2,7 @@ const express = require("express");
 const app = express.Router();
 const pool = require("../../db");
 const { isPositiveInt } = require("../router_utilities/is_positive_integer");
-const { claimListing , getDonatorEmailByListingId} = require("../../dataAccess/listingsRepository");
+const { claimListing , getDonatorEmailByListingId, createNewListing } = require("../../dataAccess/listingsRepository");
 const { getUserIdByEmail } = require("../../dataAccess/userRepository");
 const {notifyListingParticipants} = require("../../emailsender/emailsender");
 
@@ -26,10 +26,11 @@ app.post("/", async (req, res) => {
 //This has been refactored to userRepository
      const userId = await getUserIdByEmail(email);
     
-    const newlisting = await pool.query(
-      `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
-      [userId, title, description]
-    );
+     // create new listing
+
+    createNewListing(donor_id, title, description);
+
+
     res.status(201).json("OK - list was updated");
   } catch (error) {
     console.log(error);

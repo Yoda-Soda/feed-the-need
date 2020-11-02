@@ -19,4 +19,12 @@ const getDonatorEmailByListingId = async (listingId)  => {
       return dbResult.rows[0].email;
 }
 
-module.exports = { claimListing, getDonatorEmailByListingId }
+// get a listing
+const createNewListing = async (donor_id, title, description) => {
+  const newlisting = await pool.query(
+    `INSERT INTO list (donor_id, title, description) values ( $1, $2, $3 )`,
+    [donor_id, title, description]
+  );
+}
+
+module.exports = { claimListing, getDonatorEmailByListingId, createNewListing }
