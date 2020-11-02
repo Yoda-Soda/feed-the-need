@@ -143,8 +143,3 @@ const ViewListingPage = () => {
 
 export default ViewListingPage;
 
-// ClaimListingButton
-// //SO MIKE WHAT'S HAPPENING HERE IS YOU'RE TRYING TO CALL THROUGH THE CLAIM LISTING FUNCTION THAT GOES WITH THIS BUTTON;
-// YOU HAVE A SEPARATE SCRIPT FOR YOUR CLAIM LISTING BUTTON
-// That separate script is where your eventhandler or useState should be scripted.
-//Not here. (nice to see function colour for ClaimListingButton)
