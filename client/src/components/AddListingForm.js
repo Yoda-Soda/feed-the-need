@@ -23,7 +23,6 @@ const AddListingForm = () => {
           Authorization: `Bearer ${myToken}`,
         },
         body: JSON.stringify({
-          donor_id: 1,
           title: listingTitle,
           description: listingDescription,
         }),
