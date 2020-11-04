@@ -26,19 +26,11 @@ app.post("/", async (req, res) => {
       return res.status(400).send("Bad Request - missing parameter/s");
     }
     console.log(getUserIdByEmail);
-<<<<<<< HEAD
-//This has been refactored to userRepository
-     const donor_id = await getUserIdByEmail(email);
-    
-     // create new listing
-    createNewListing(donor_id, title, description);
-=======
     //This has been refactored to userRepository
     const donorID = await getUserIdByEmail(email);
 
     // create new listing
     createNewListing(donorID, title, description);
->>>>>>> dc072b25d883216eb5fce13c023704bd8d182d8b
 
     res.status(201).json("OK - list was updated");
   } catch (error) {
