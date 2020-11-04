@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "dbUpdate": "node tools/db-update.js",
+    "dbUpdate": "node tools/region-parser.js",
     "build": "cd server && npm install && cd ../client/ && npm install && npm run build && cp -r  build ../server/ui"
   }
 }
