@@ -32,3 +32,9 @@ insert into list
 	(donor_id, title, description )
 values
 	( 1, 'My Item', 'My Item Description');
+
+CREATE TABLE region
+	(
+		cities VARCHAR(200),
+		suburb VARCHAR(200)
+	);
