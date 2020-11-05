@@ -35,6 +35,7 @@ values
 
 CREATE TABLE region
 	(
+		id SERIAL PRIMARY KEY,
 		cities VARCHAR(200),
 		suburb VARCHAR(200)
 	);
