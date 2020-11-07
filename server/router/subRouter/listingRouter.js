@@ -18,16 +18,12 @@ app.post("/", async (req, res) => {
   try {
     //console.log(req.user);
     const email = req.user[`http://feedtheneed.click/email`];
-    const { donor_id, title, description } = req.body;
+    const {title, description } = req.body;
     if (
-      donor_id === undefined ||
       title === undefined ||
       description === undefined
     ) {
       return res.status(400).send("Bad Request - missing parameter/s");
-    }
-    if (!isPositiveInt(donor_id)) {
-      return res.status(400).send("Bad Request - donor_id is not positiveInt");
     }
     console.log(getUserIdByEmail);
     //This has been refactored to userRepository
