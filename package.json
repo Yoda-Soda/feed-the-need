@@ -7,7 +7,10 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "dbUpdate": "node tools/region-parser.js",
+    "dbUpdate": "node -r dotenv/config tools/region-parser.js",
     "build": "cd server && npm install && cd ../client/ && npm install && npm run build && cp -r  build ../server/ui"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
   }
 }
