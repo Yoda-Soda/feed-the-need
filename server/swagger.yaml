@@ -26,11 +26,9 @@ paths:
               $ref: "#/components/schema/NewListing"
               type: object
               properties:
-                donorId: integer
                 title: string
                 description: string
               required:
-                - donorId
                 - title
                 - description
       responses:
@@ -84,7 +82,6 @@ paths:
               schema:
                 type: object
                 required:
-                  - donorId
                   - title
                   - description
                 properties:
@@ -92,8 +89,6 @@ paths:
                     type: integer
                     primary: true
                     example: 1
-                  donorId:
-                    type: integer
                   title:
                     type: string
                     example: This is a title
@@ -150,7 +145,6 @@ components:
     Listings:
       type: object
       required:
-        - donor_id
         - title
         - description
       properties:
@@ -158,8 +152,6 @@ components:
           type: integer
           primary: true
           example: 1
-        donor_id:
-          type: integer
         title:
           type: string
           example: This is a title
@@ -203,8 +195,6 @@ components:
       required:
         $ref: "#/components/schema/Listings/required"
       properties:
-        donor_id:
-          $ref: "#/components/schema/Listings/properties/donor_id"
         title:
           $ref: "#/components/schema/Listings/properties/title"
         description:
