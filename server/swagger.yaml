@@ -4,6 +4,16 @@ info:
   description: The API is for use with the website [Feed The Need](http://feedtheneed.click) or internal staging at [localhost:3333](http://localhost:3333).
   version: 0.0.1
 
+# For Swagger to always work, remove any defined Servers,
+# so that Swagger will always default to the server that it was spun up from.
+# This will minimise the scope for errors occuring.
+
+# servers:
+#   - url: http://localhost:5123/api
+#     description: Internal staging API server for testing
+#   - url: http://feedtheneed.click/api
+#     description: Main API server
+
 paths:
   /listings:
     post:
