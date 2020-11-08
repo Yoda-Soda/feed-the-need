@@ -16,16 +16,11 @@ const { notifyListingParticipants } = require("../../emailsender/emailsender");
 /****  post /api/listings - post single listing  ****/
 app.post("/", async (req, res) => {
   try {
-    //console.log(req.user);
     const email = req.user[`http://feedtheneed.click/email`];
-    const {title, description } = req.body;
-    if (
-      title === undefined ||
-      description === undefined
-    ) {
+    const { title, description } = req.body;
+    if (title === undefined || description === undefined) {
       return res.status(400).send("Bad Request - missing parameter/s");
     }
-    console.log(getUserIdByEmail);
     //This has been refactored to userRepository
     const donorID = await getUserIdByEmail(email);
 
@@ -34,7 +29,7 @@ app.post("/", async (req, res) => {
 
     res.status(201).json("OK - list was updated");
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).end();
   }
 });
@@ -55,11 +50,8 @@ app.get("/", async (req, res) => {
 /****  Get One request /api/listings/{id} ****/
 
 app.get("/:id", async (req, res) => {
-  console.log("get one route confirmed");
-
   try {
     const { id } = req.params;
-    console.log(id);
     if (!isPositiveInt(id)) {
       return res.status(400).send("Bad Request - id is not a positiveInt");
     }
@@ -72,7 +64,6 @@ app.get("/:id", async (req, res) => {
     }
 
     res.json(singleListing.rows[0]);
-    // console.log(singleListing.rows);
   } catch (err) {
     console.error(err.message);
     return res.status(500).send("Server error");
@@ -85,7 +76,6 @@ app.patch("/:id", async (req, res) => {
   // listing id
   const listingId = req.params.id;
   const donateeEmail = req.user[`http://feedtheneed.click/email`];
-  console.log(req.user[`http://feedtheneed.click/email`]);
 
   // if any of the fields are missing, send error
   if (listingId === undefined || donateeEmail === undefined) {
@@ -100,7 +90,6 @@ app.patch("/:id", async (req, res) => {
   try {
     // get the claimant ID from the claimer user's email
     let claimantId = await getUserIdByEmail(donateeEmail);
-    console.log(claimantId);
 
     const resultFromDb = await claimListing(listingId, claimantId);
     // actually, need to check if there is a db rows result returned on success, otherwise SQL will still send you an "okay"
@@ -120,10 +109,8 @@ app.patch("/:id", async (req, res) => {
 });
 
 app.get("/:id", async (req, res) => {
-  console.log("Sending email between donor and claimant");
   try {
     const { id } = req.params;
-    console.log(id);
     if (!isPositiveInt(id)) {
       return res
         .status(400)
@@ -137,7 +124,6 @@ app.get("/:id", async (req, res) => {
       return res.status(404).send("No listing exists with that Id");
     }
     res.json(singleClaimedListing.rows[0]);
-    // console.log(singleListing.rows);
   } catch (err) {
     console.error(err.message);
     return res.status(500).send("Server error");
