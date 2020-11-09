@@ -34,13 +34,12 @@ const HeaderBar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className="title">
-          <a href="/">
             <img
               className={classes.root}
               src="/logo.svg"
               alt="Feed the need logo"
+              onClick={ () => { history.push("/") }}
             />
-          </a>
         </Typography>
         Add a Listing
         <span className="email">{user.email} </span>
