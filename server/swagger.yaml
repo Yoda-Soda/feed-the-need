@@ -1,21 +1,17 @@
 openapi: 3.0.3
 info:
   title: Nau mai, welcome to Feed the Need
-  description: The API is for use with the website [Feed The Need](http://feedtheneed.click).
+  description: The API is for use with the website [Feed The Need](http://feedtheneed.click) or internal staging at [localhost:3333](http://localhost:3333).
   version: 0.0.1
 
-# For Swagger to always work, remove any defined Servers,
-# so that Swagger will always default to the server that it was spun up from.
-# This will minimise the scope for errors occuring.
-
-# servers:
-#   - url: http://localhost:5123/api
-#     description: Internal staging API server for testing
-#   - url: http://feedtheneed.click/api
-#     description: Main API server
+servers:
+  - url: http://localhost:5123/api
+    description: Internal staging API server for testing
+  - url: http://feedtheneed.click/api
+    description: Main API server
 
 paths:
-  /api/listings:
+  /listings:
     post:
       summary: Creates a new listing.
       consumes:
@@ -68,7 +64,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
-  /api/listings/{listingsId}:
+  /listings/{listingsId}:
     get:
       summary: Gets a listing by ID.
       parameters:
@@ -120,18 +116,19 @@ paths:
       produces:
         - application/json
       responses:
-        "200":
+        '200':
           description: OK - list was updated
-        "400":
+        '400':
           description: Bad Request - id is not a positiveInt
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "500":
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
           description: Could not claim item
       tag:
         - listings
+
 
 components:
   responses:
