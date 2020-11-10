@@ -1,5 +1,6 @@
 const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey('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')
+// sgMail.setApiKey('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')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const senderEmail = 'michaelbotur@developersinstitute.co.nz'
 const sendDonatorMessage = (donatorEmail, donateeEmail) => {
     const msg = {
