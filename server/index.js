@@ -15,8 +15,8 @@ app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api", jwtCheck, apiRouter);
 
-if (!process.env.NODE_ENV === "development") {
-  // production environment
+
+// production environment
   // serve up the folder you are currently in, slash ui
   app.use(express.static(path.join(__dirname, "ui")));
 
@@ -24,7 +24,9 @@ if (!process.env.NODE_ENV === "development") {
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "ui", "index.html"));
   });
-}
+// remove conditional code
+// if (!process.env.NODE_ENV === "development") {  
+// }
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
