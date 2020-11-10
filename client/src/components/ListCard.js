@@ -17,26 +17,24 @@ import { useHistory } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 400,
+    height: 380,
   },
   media: {
     height: 0,
     paddingTop: "56.25%", // 16:9
   },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
+
   avatar: {
     backgroundColor: red[500],
   },
   cardwidth: {
     width: 400,
+  },
+  description: {
+    // margin: 5,
+    padding: 0,
+    // width: 200,
+    overflowWrap: "break-word",
   },
 }));
 
@@ -86,7 +84,12 @@ const RecipeReviewCard = (props) => {
           title={title}
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography
+            className={classes.description}
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
             {description}
           </Typography>
         </CardContent>
