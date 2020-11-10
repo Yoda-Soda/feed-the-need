@@ -14,8 +14,13 @@ app.use(cors());
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api", jwtCheck, apiRouter);
+
 if (!process.env.NODE_ENV === "development") {
+  // production environment
+  // serve up the folder you are currently in, slash ui
   app.use(express.static(path.join(__dirname, "ui")));
+
+  // "for all other routes (ie client routes) do this..."
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "ui", "index.html"));
   });
