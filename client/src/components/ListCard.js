@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
+import trunk from "./tools/trunk";
 import {
   Card,
   CardHeader,
@@ -31,9 +32,7 @@ const useStyles = makeStyles((theme) => ({
     width: 400,
   },
   description: {
-    // margin: 5,
     padding: 0,
-    // width: 200,
     overflowWrap: "break-word",
   },
 }));
@@ -90,7 +89,8 @@ const RecipeReviewCard = (props) => {
             color="textSecondary"
             component="p"
           >
-            {description}
+            {trunk(description, 100)}
+            {console.log(description)}
           </Typography>
         </CardContent>
       </Card>
