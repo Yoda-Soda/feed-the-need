@@ -39,6 +39,9 @@ const HeaderBar = () => {
               className={classes.root}
               src="/logo.svg"
               alt="Feed the need logo"
+              onClick={() => {
+                history.push("/");
+              }}
             />
           </a>
         </Typography>
@@ -48,7 +51,9 @@ const HeaderBar = () => {
           className={classes.buttonpadding}
           variant="contained"
           color="primary"
-          onClick={ () => { history.push("/my-listings/add") }}
+          onClick={() => {
+            history.push("/my-listings/add");
+          }}
         >
           Add Listing
         </Button>
