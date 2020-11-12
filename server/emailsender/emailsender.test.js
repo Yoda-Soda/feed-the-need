@@ -20,6 +20,14 @@ describe("Given that we have a mail sender", () => {
 		test("Then it will set the API Key", () => {
 			expect(mockSetApiKey).toBeCalled();
 		});
+
+		test("then send donatee message", () => {
+			emailsender.notifyListingParticipants('foo@test.example', 'bar@test.example');
+			expect(mockSend).toBeCalledWith(expect.anything());
+			
+		});
+
+
 	});
 
 });
