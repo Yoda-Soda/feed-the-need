@@ -1,11 +1,20 @@
 
+// create your mock variables that you will use to replace the real ones
 const mockSend = jest.fn(()=>new Promise(()=>{}));
 const mockSetApiKey = jest.fn((apiKey)=>{});
- 
+const mockEmailContent = {
+    donateeEmail: 'foo@test.example', //  recipient
+    senderEmail: 'bar@test.example', // sender
+    // subject: "mock subject",
+    // text: `Congratulations, you claimed an item. Please arrange hand-over by emailing them at mock-sender@example.example`
+}
+
+// attach your mock variables in place of the correct real variables
 jest.mock("@sendgrid/mail", () => {
 	return {
 		send: mockSend,
-		setApiKey: mockSetApiKey
+        setApiKey: mockSetApiKey,
+        msg: mockEmailContent
 	}
 });
 
@@ -22,13 +31,10 @@ describe("Given that we have a mail sender", () => {
 		});
 
 		test("then send donatee message", () => {
-			emailsender.notifyListingParticipants('foo@test.example', 'bar@test.example');
-			expect(mockSend).toBeCalledWith(expect.anything());
-			
+			emailsender.notifyListingParticipants('foo@test.example', 'bar@test.example');            
+            expect(mockSend).toBeCalledWith(expect.anything());		
+            expect.objectContaining(mockEmailContent);
 		});
-
-
 	});
-
 });
 
